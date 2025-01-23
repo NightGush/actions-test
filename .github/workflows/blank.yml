@@ -38,6 +38,9 @@ jobs:
       - name: download package
         run: git clone https://aur.archlinux.org/yay.git
 
+      - name: give build user perms
+        run: chown -R build:build yay
+
       - name: build in clean chroot
         run: su build -c "cd yay && makepkg -s"
 
