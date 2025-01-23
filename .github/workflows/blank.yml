@@ -30,19 +30,16 @@ jobs:
         run: pacman -Syu --noconfirm
 
       - name: install git
-        run: pacman -S git --noconfirm
+        run: pacman -S git base-devel devtools --noconfirm
       
       - name: download package
         run: git clone https://aur.archlinux.org/yay.git
 
-      - name: build-arch-package
-        uses: FFY00/build-arch-package@v1
-        with:
-          PKGBUILD: yay/PKGBUILD
-          OUTDIR: output/yay
+      - name: build in clean chroot
+        run: cd yay && extra-x86_64-build -c
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
           name: yay-package
-          path: output/yay
+          path: yay
