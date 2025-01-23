@@ -43,7 +43,7 @@ jobs:
         run: git clone https://aur.archlinux.org/snapd.git
 
       - name: give build user perms
-        run: chown -R build:build yay
+        run: chown -R build:build snapd
 
       - name: build in clean chroot
         run: su build -c "cd snapd && makepkg -s --noconfirm"
