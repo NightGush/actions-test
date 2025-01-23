@@ -40,16 +40,17 @@ jobs:
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
       
       - name: download package
-        run: git clone https://aur.archlinux.org/yay.git
+        run: git clone https://aur.archlinux.org/snapd.git
 
       - name: give build user perms
         run: chown -R build:build yay
 
       - name: build in clean chroot
-        run: su build -c "cd yay && makepkg -s --noconfirm"
+        run: su build -c "cd snapd && makepkg -s --noconfirm"
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: yay-package
-          path: yay
+          name: snapd-package
+          path: snapd/*.pkg.tar.zst
+          
