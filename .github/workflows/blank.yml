@@ -33,7 +33,7 @@ jobs:
         run: pacman -S git base-devel devtools --noconfirm
 
       - name: add build user
-        run: useradd build
+        run: useradd -m build
 
       - name: give build unlimited power
         run: |
