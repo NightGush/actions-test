@@ -36,7 +36,7 @@ jobs:
         run: git clone https://aur.archlinux.org/yay.git
 
       - name: build in clean chroot
-        run: cd yay && makepkg -s
+        run: su nobody -c "cd yay && makepkg -s"
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
