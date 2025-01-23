@@ -26,6 +26,12 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git --noconfirm
+      
       - name: download package
         run: git clone https://aur.archlinux.org/yay.git
 
