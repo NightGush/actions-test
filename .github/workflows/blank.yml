@@ -36,7 +36,8 @@ jobs:
         run: useradd build
 
       - name: give build unlimited power
-        run: echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
       
       - name: download package
         run: git clone https://aur.archlinux.org/yay.git
