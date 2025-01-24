@@ -40,17 +40,17 @@ jobs:
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
       
       - name: download package
-        run: git clone https://aur.archlinux.org/linux-mainline.git
+        run: git clone https://aur.archlinux.org/linux-cachyos.git
 
       - name: give build user perms
-        run: chown -R build:build linux-mainline
+        run: chown -R build:build linux-cachyos
 
       - name: build in clean chroot
-        run: su build -c "cd linux-mainline && makepkg -s --noconfirm"
+        run: su build -c "cd linux-cachyos && makepkg -s --noconfirm"
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: linux-mainline-package
-          path: linux-mainline/*.pkg.tar.zst
+          name: linux-cachyos-package
+          path: linux-cachyos/*.pkg.tar.zst
           
