@@ -40,17 +40,17 @@ jobs:
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
       
       - name: download package
-        run: git clone https://aur.archlinux.org/firefox-nightly.git
+        run: git clone https://aur.archlinux.org/linux-ck.git
 
       - name: give build user perms
-        run: chown -R build:build firefox-nightly
+        run: chown -R build:build linux-ck
 
       - name: build in clean chroot
-        run: su build -c "cd firefox-nightly && makepkg -s --noconfirm"
+        run: su build -c "cd linux-ck && makepkg -s --noconfirm"
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: firefox-nightly-package
-          path: firefox-nightly/*.pkg.tar.zst
+          name: linux-ck-package
+          path: linux-ck/*.pkg.tar.zst
           
