@@ -15,7 +15,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  qt-sudo:
+  yay:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -39,22 +39,61 @@ jobs:
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
       
       - name: download package
-        run: git clone https://aur.archlinux.org/qt-sudo.git
+        run: git clone https://aur.archlinux.org/yay.git
 
       - name: give build user perms
-        run: chown -R build:build qt-sudo
+        run: chown -R build:build yay
 
       - name: build in clean chroot
-        run: su build -c "cd qt-sudo && makepkg -s --noconfirm"
+        run: su build -c "cd yay && makepkg -s --noconfirm"
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: qt-sudo-package
-          path: qt-sudo/*.pkg.tar.zst
-  octopi:
+          name: yay-package
+          path: yay/*.pkg.tar.zst
+          
+  snapd:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    needs: qt-sudo
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/snapd.git
+
+      - name: give build user perms
+        run: chown -R build:build snapd
+
+      - name: build in clean chroot
+        run: su build -c "cd snapd && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: snapd-package
+          path: snapd/*.pkg.tar.zst
+          
+  axu:
+    runs-on: ubuntu-latest
+    needs: yay
 
     container:
       image: archlinux
@@ -74,25 +113,526 @@ jobs:
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
           
-      - name: download qt-sudo
+      - name: download yay
         uses: actions/download-artifact@v4.1.8
         with:
-          name: qt-sudo-package
+          name: yay-package
 
-      - name: install qt-sudo
+      - name: install yay
         run: pacman -U *.pkg.tar.zst --noconfirm
       
       - name: download package
-        run: git clone https://aur.archlinux.org/octopi.git
+        run: git clone https://aur.archlinux.org/axu.git
 
       - name: give build user perms
-        run: chown -R build:build octopi
+        run: chown -R build:build axu
 
       - name: build in clean chroot
-        run: su build -c "cd octopi && makepkg -s --noconfirm"
+        run: su build -c "cd axu && makepkg -s --noconfirm"
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: octopi-package
-          path: octopi/*.pkg.tar.zst
+          name: axu-package
+          path: axu/*.pkg.tar.zst
+          
+  blender-launcher-git:
+    runs-on: ubuntu-latest
+    needs: yay
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+          
+      - name: download yay
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: yay-package
+
+      - name: install yay
+        run: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/blender-launcher-git.git
+
+      - name: give build user perms
+        run: chown -R build:build blender-launcher-git
+
+      - name: build in clean chroot
+        run: su build -c "cd blender-launcher-git && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: blender-launcher-git-package
+          path: blender-launcher-git/*.pkg.tar.zst
+          
+
+  checkupdatify:
+    runs-on: ubuntu-latest
+    needs: yay
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+          
+      - name: download yay
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: yay-package
+
+      - name: install yay
+        run: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/checkupdatify.git
+
+      - name: give build user perms
+        run: chown -R build:build checkupdatify
+
+      - name: build in clean chroot
+        run: su build -c "cd checkupdatify && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: checkupdatify-package
+          path: checkupdatify/*.pkg.tar.zst
+          
+  etwas:
+    runs-on: ubuntu-latest
+    needs: yay
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+          
+      - name: download yay
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: yay-package
+
+      - name: install yay
+        run: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/etwas.git
+
+      - name: give build user perms
+        run: chown -R build:build etwas
+
+      - name: build in clean chroot
+        run: su build -c "cd etwas && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: etwas-package
+          path: etwas/*.pkg.tar.zst
+          
+  idos-package-updater-script:
+    runs-on: ubuntu-latest
+    needs: yay
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+          
+      - name: download yay
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: yay-package
+
+      - name: install yay
+        run: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/idos-package-updater-script.git
+
+      - name: give build user perms
+        run: chown -R build:build idos-package-updater-script
+
+      - name: build in clean chroot
+        run: su build -c "cd idos-package-updater-script && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: idos-package-updater-script-package
+          path: idos-package-updater-script/*.pkg.tar.zst
+          
+  pak-git:
+    runs-on: ubuntu-latest
+    needs: yay
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+          
+      - name: download yay
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: yay-package
+
+      - name: install yay
+        run: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/pak-git.git
+
+      - name: give build user perms
+        run: chown -R build:build pak-git
+
+      - name: build in clean chroot
+        run: su build -c "cd pak-git && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: pak-git-package
+          path: pak-git/*.pkg.tar.zst
+          
+  paxs:
+    runs-on: ubuntu-latest
+    needs: [yay, snapd]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+          
+      - name: download yay
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: yay-package
+
+      - name: download snapd
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: snapd-package
+
+      - name: install packages
+        run: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/paxs.git
+
+      - name: give build user perms
+        run: chown -R build:build paxs
+
+      - name: build in clean chroot
+        run: su build -c "cd paxs && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: paxs-package
+          path: paxs/*.pkg.tar.zst
+          
+  pcmn-git:
+    runs-on: ubuntu-latest
+    needs: yay
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+          
+      - name: download yay
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: yay-package
+
+      - name: install yay
+        run: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/pcmn-git.git
+
+      - name: give build user perms
+        run: chown -R build:build pcmn-git
+
+      - name: build in clean chroot
+        run: su build -c "cd pcmn-git && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: pcmn-git-package
+          path: pcmn-git/*.pkg.tar.zst
+          
+  pkm:
+    runs-on: ubuntu-latest
+    needs: yay
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+          
+      - name: download yay
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: yay-package
+
+      - name: install yay
+        run: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/pkm.git
+
+      - name: give build user perms
+        run: chown -R build:build pkm
+
+      - name: build in clean chroot
+        run: su build -c "cd pkm && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: pkm-package
+          path: pkm/*.pkg.tar.zst
+          
+  spm-arch:
+    runs-on: ubuntu-latest
+    needs: yay
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+          
+      - name: download yay
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: yay-package
+
+      - name: install yay
+        run: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/spm-arch.git
+
+      - name: give build user perms
+        run: chown -R build:build spm-arch
+
+      - name: build in clean chroot
+        run: su build -c "cd spm-arch && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: spm-arch-package
+          path: spm-arch/*.pkg.tar.zst
+          
+  ualsv:
+    runs-on: ubuntu-latest
+    needs: yay
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+          
+      - name: download yay
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: yay-package
+
+      - name: install yay
+        run: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/ualsv.git
+
+      - name: give build user perms
+        run: chown -R build:build ualsv
+
+      - name: build in clean chroot
+        run: su build -c "cd ualsv && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: ualsv-package
+          path: ualsv/*.pkg.tar.zst
+          
+  yayfzf:
+    runs-on: ubuntu-latest
+    needs: yay
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+          
+      - name: download yay
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: yay-package
+
+      - name: install yay
+        run: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/yayfzf.git
+
+      - name: give build user perms
+        run: chown -R build:build yayfzf
+
+      - name: build in clean chroot
+        run: su build -c "cd yayfzf && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: yayfzf-package
+          path: yayfzf/*.pkg.tar.zst
