@@ -34,24 +34,28 @@ jobs:
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
 
-      - name: Generate Download Steps
+      - name: Prepare Dependency Matrix
         if: ${{ inputs.dependencies != '' }}
-        id: generate_download_steps
+        id: prepare_matrix
         run: |
           DEPENDENCIES="${{ inputs.dependencies }}"
           IFS=',' read -r -a DEPENDENCY_LIST <<< "$DEPENDENCIES"
+          DEPENDENCY_JSON=$(jq -n --arg deps "$(jq -c <<< "$DEPENDENCY_LIST")" '{"dependency": $deps | fromjson}')
+          echo "DEPENDENCY_MATRIX=$DEPENDENCY_JSON" >> "$GITHUB_OUTPUT"
+          echo "Dependency Matrix JSON: $DEPENDENCY_JSON"
 
-          for dep in "${DEPENDENCY_LIST[@]}"; do
-            artifact_name="${dep}-package"
-            download_path="${{ runner.temp }}/dependencies/$dep"
-            mkdir -p "$download_path"
+    strategy:
+      matrix:
+        include: ${{ fromJson(steps.prepare_matrix.outputs.DEPENDENCY_MATRIX).dependency }}
+      fail-fast: true
 
-            echo "::add-step name=Download artifact - $dep"
-            echo "::add-step uses=actions/download-artifact@v4"
-            echo "::add-step with.name=$artifact_name"
-            echo "::add-step with.path=$download_path"
-            echo "::end-step"
-          done
+    steps:
+      - name: Download artifact - ${{ matrix.dependency }}
+        if: ${{ matrix.dependency != '' }} # redundant if 'include' is set up correctly, but good practice
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ matrix.dependency }}-package
+          path: ${{ runner.temp }}/dependencies/${{ matrix.dependency }}
 
       - name: install packages
         if: ${{ inputs.dependencies != '' }}
