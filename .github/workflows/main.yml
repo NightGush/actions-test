@@ -79,7 +79,8 @@ jobs:
         run: useradd -m build
 
       - name: Grant build user sudo permissions
-        run: echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
 
       - name: Download artifacts (yay)
         uses: actions/download-artifact@v4.1.8
