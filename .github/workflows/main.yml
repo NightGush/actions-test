@@ -40,7 +40,8 @@ jobs:
         run: useradd -m build
 
       - name: Grant build user sudo permissions
-        run: echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
 
       - name: Download package
         run: git clone https://aur.archlinux.org/${{ matrix.package }}.git
