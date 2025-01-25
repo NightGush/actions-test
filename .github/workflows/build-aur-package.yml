@@ -57,7 +57,7 @@ jobs:
 
       - name: Remove colons from filename
         run: |
-          find ${{ inputs.package_name }} -name "*.pkg.tar.zst" -print0 | xargs -0 -I {} sh -c 'mv "{}" "$(echo "{}" | sed "s/\([^-]\):/\1-/g")"'
+          find ${{ inputs.package_name }} -name "*.pkg.tar.zst" -print0 | xargs -0 -I {} sh -c 'if [[ "{}" == *:* ]]; then mv "{}" "$(echo "{}" | sed "s/\([^-]\):/\1-/g")"; fi'
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4
