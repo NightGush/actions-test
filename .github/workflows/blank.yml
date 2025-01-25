@@ -80,7 +80,7 @@ jobs:
           name: qt-sudo-package
 
       - name: install qt-sudo
-        run: pacman -U *.pkg.tar.zst
+        run: pacman -U *.pkg.tar.zst --noconfirm
       
       - name: download package
         run: git clone https://aur.archlinux.org/octopi.git
