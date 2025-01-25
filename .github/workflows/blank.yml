@@ -15,7 +15,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  yay:
+  icoextract:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -37,23 +37,26 @@ jobs:
       - name: give build unlimited power
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
-      
+
       - name: download package
-        run: git clone https://aur.archlinux.org/yay.git
+        run: git clone https://aur.archlinux.org/icoextract.git
 
       - name: give build user perms
-        run: chown -R build:build yay
+        run: chown -R build:build icoextract
 
       - name: build in clean chroot
-        run: su build -c "cd yay && makepkg -s --noconfirm"
+        run: su build -c "cd icoextract && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' icoextract/*.pkg.tar.zst
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: yay-package
-          path: yay/*.pkg.tar.zst
-          
-  snapd:
+          name: icoextract-package
+          path: icoextract/*.pkg.tar.zst
+
+  patool:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -75,30 +78,34 @@ jobs:
       - name: give build unlimited power
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
-      
+
       - name: download package
-        run: git clone https://aur.archlinux.org/snapd.git
+        run: git clone https://aur.archlinux.org/patool.git
 
       - name: give build user perms
-        run: chown -R build:build snapd
+        run: chown -R build:build patool
 
       - name: build in clean chroot
-        run: su build -c "cd snapd && makepkg -s --noconfirm"
+        run: su build -c "cd patool && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' patool/*.pkg.tar.zst
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: snapd-package
-          path: snapd/*.pkg.tar.zst
-          
-  axu:
+          name: patool-package
+          path: patool/*.pkg.tar.zst
+
+  python-fvs:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    needs: yay
 
     container:
       image: archlinux
       options: --privileged
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: update pacman
         run: pacman -Syu --noconfirm
@@ -112,38 +119,34 @@ jobs:
       - name: give build unlimited power
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
-          
-      - name: download yay
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: yay-package
 
-      - name: install yay
-        run: pacman -U *.pkg.tar.zst --noconfirm
-      
       - name: download package
-        run: git clone https://aur.archlinux.org/axu.git
+        run: git clone https://aur.archlinux.org/python-fvs.git
 
       - name: give build user perms
-        run: chown -R build:build axu
+        run: chown -R build:build python-fvs
 
       - name: build in clean chroot
-        run: su build -c "cd axu && makepkg -s --noconfirm"
+        run: su build -c "cd python-fvs && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-fvs/*.pkg.tar.zst
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: axu-package
-          path: axu/*.pkg.tar.zst
-          
-  blender-launcher-git:
+          name: python-fvs-package
+          path: python-fvs/*.pkg.tar.zst
+
+  python-pathvalidate:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    needs: yay
 
     container:
       image: archlinux
       options: --privileged
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: update pacman
         run: pacman -Syu --noconfirm
@@ -157,39 +160,34 @@ jobs:
       - name: give build unlimited power
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
-          
-      - name: download yay
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: yay-package
 
-      - name: install yay
-        run: pacman -U *.pkg.tar.zst --noconfirm
-      
       - name: download package
-        run: git clone https://aur.archlinux.org/blender-launcher-git.git
+        run: git clone https://aur.archlinux.org/python-pathvalidate.git
 
       - name: give build user perms
-        run: chown -R build:build blender-launcher-git
+        run: chown -R build:build python-pathvalidate
 
       - name: build in clean chroot
-        run: su build -c "cd blender-launcher-git && makepkg -s --noconfirm"
+        run: su build -c "cd python-pathvalidate && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-pathvalidate/*.pkg.tar.zst
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: blender-launcher-git-package
-          path: blender-launcher-git/*.pkg.tar.zst
-          
+          name: python-pathvalidate-package
+          path: python-pathvalidate/*.pkg.tar.zst
 
-  checkupdatify:
+  python-steamgriddb:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    needs: yay
 
     container:
       image: archlinux
       options: --privileged
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: update pacman
         run: pacman -Syu --noconfirm
@@ -203,38 +201,34 @@ jobs:
       - name: give build unlimited power
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
-          
-      - name: download yay
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: yay-package
 
-      - name: install yay
-        run: pacman -U *.pkg.tar.zst --noconfirm
-      
       - name: download package
-        run: git clone https://aur.archlinux.org/checkupdatify.git
+        run: git clone https://aur.archlinux.org/python-steamgriddb.git
 
       - name: give build user perms
-        run: chown -R build:build checkupdatify
+        run: chown -R build:build python-steamgriddb
 
       - name: build in clean chroot
-        run: su build -c "cd checkupdatify && makepkg -s --noconfirm"
+        run: su build -c "cd python-steamgriddb && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-steamgriddb/*.pkg.tar.zst
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: checkupdatify-package
-          path: checkupdatify/*.pkg.tar.zst
-          
-  etwas:
+          name: python-steamgriddb-package
+          path: python-steamgriddb/*.pkg.tar.zst
+
+  vkbasalt-cli:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    needs: yay
 
     container:
       image: archlinux
       options: --privileged
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: update pacman
         run: pacman -Syu --noconfirm
@@ -248,38 +242,34 @@ jobs:
       - name: give build unlimited power
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
-          
-      - name: download yay
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: yay-package
 
-      - name: install yay
-        run: pacman -U *.pkg.tar.zst --noconfirm
-      
       - name: download package
-        run: git clone https://aur.archlinux.org/etwas.git
+        run: git clone https://aur.archlinux.org/vkbasalt-cli.git
 
       - name: give build user perms
-        run: chown -R build:build etwas
+        run: chown -R build:build vkbasalt-cli
 
       - name: build in clean chroot
-        run: su build -c "cd etwas && makepkg -s --noconfirm"
+        run: su build -c "cd vkbasalt-cli && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' vkbasalt-cli/*.pkg.tar.zst
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: etwas-package
-          path: etwas/*.pkg.tar.zst
-          
-  idos-package-updater-script:
+          name: vkbasalt-cli-package
+          path: vkbasalt-cli/*.pkg.tar.zst
+
+  python-pynput:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    needs: yay
 
     container:
       image: archlinux
       options: --privileged
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: update pacman
         run: pacman -Syu --noconfirm
@@ -293,38 +283,34 @@ jobs:
       - name: give build unlimited power
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
-          
-      - name: download yay
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: yay-package
 
-      - name: install yay
-        run: pacman -U *.pkg.tar.zst --noconfirm
-      
       - name: download package
-        run: git clone https://aur.archlinux.org/idos-package-updater-script.git
+        run: git clone https://aur.archlinux.org/python-pynput.git
 
       - name: give build user perms
-        run: chown -R build:build idos-package-updater-script
+        run: chown -R build:build python-pynput
 
       - name: build in clean chroot
-        run: su build -c "cd idos-package-updater-script && makepkg -s --noconfirm"
+        run: su build -c "cd python-pynput && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-pynput/*.pkg.tar.zst
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: idos-package-updater-script-package
-          path: idos-package-updater-script/*.pkg.tar.zst
-          
-  pak-git:
+          name: python-pynput-package
+          path: python-pynput/*.pkg.tar.zst
+
+  python-python-sat:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    needs: yay
 
     container:
       image: archlinux
       options: --privileged
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: update pacman
         run: pacman -Syu --noconfirm
@@ -338,38 +324,34 @@ jobs:
       - name: give build unlimited power
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
-          
-      - name: download yay
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: yay-package
 
-      - name: install yay
-        run: pacman -U *.pkg.tar.zst --noconfirm
-      
       - name: download package
-        run: git clone https://aur.archlinux.org/pak-git.git
+        run: git clone https://aur.archlinux.org/python-python-sat.git
 
       - name: give build user perms
-        run: chown -R build:build pak-git
+        run: chown -R build:build python-python-sat
 
       - name: build in clean chroot
-        run: su build -c "cd pak-git && makepkg -s --noconfirm"
+        run: su build -c "cd python-python-sat && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-python-sat/*.pkg.tar.zst
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: pak-git-package
-          path: pak-git/*.pkg.tar.zst
-          
-  paxs:
+          name: python-python-sat-package
+          path: python-python-sat/*.pkg.tar.zst
+
+  python-rply:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    needs: [yay, snapd]
 
     container:
       image: archlinux
       options: --privileged
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: update pacman
         run: pacman -Syu --noconfirm
@@ -383,43 +365,715 @@ jobs:
       - name: give build unlimited power
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
-          
-      - name: download yay
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: yay-package
 
-      - name: download snapd
-        uses: actions/download-artifact@v4.1.8
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-rply.git
+
+      - name: give build user perms
+        run: chown -R build:build python-rply
+
+      - name: build in clean chroot
+        run: su build -c "cd python-rply && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-rply/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
         with:
-          name: snapd-package
+          name: python-rply-package
+          path: python-rply/*.pkg.tar.zst
+
+  python-pytest-runner:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pytest-runner.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pytest-runner
+
+      - name: build in clean chroot
+        run: su build -c "cd python-pytest-runner && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-pytest-runner/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pytest-runner-package
+          path: python-pytest-runner/*.pkg.tar.zst
+
+  python-restrictedpython:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-restrictedpython.git
+
+      - name: give build user perms
+        run: chown -R build:build python-restrictedpython
+
+      - name: build in clean chroot
+        run: su build -c "cd python-restrictedpython && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-restrictedpython/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-restrictedpython-package
+          path: python-restrictedpython/*.pkg.tar.zst
+
+  python-autodocsumm:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-autodocsumm.git
+
+      - name: give build user perms
+        run: chown -R build:build python-autodocsumm
+
+      - name: build in clean chroot
+        run: su build -c "cd python-autodocsumm && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-autodocsumm/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-autodocsumm-package
+          path: python-autodocsumm/*.pkg.tar.zst
+
+  python-annexremote:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-annexremote.git
+
+      - name: give build user perms
+        run: chown -R build:build python-annexremote
+
+      - name: build in clean chroot
+        run: su build -c "cd python-annexremote && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-annexremote/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-annexremote-package
+          path: python-annexremote/*.pkg.tar.zst
+
+  python-looseversion:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-looseversion.git
+
+      - name: give build user perms
+        run: chown -R build:build python-looseversion
+
+      - name: build in clean chroot
+        run: su build -c "cd python-looseversion && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-looseversion/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-looseversion-package
+          path: python-looseversion/*.pkg.tar.zst
+
+  python-types-requests:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-types-requests.git
+
+      - name: give build user perms
+        run: chown -R build:build python-types-requests
+
+      - name: build in clean chroot
+        run: su build -c "cd python-types-requests && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-types-requests/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-types-requests-package
+          path: python-types-requests/*.pkg.tar.zst
+
+  python-aim-ui:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-aim-ui.git
+
+      - name: give build user perms
+        run: chown -R build:build python-aim-ui
+
+      - name: build in clean chroot
+        run: su build -c "cd python-aim-ui && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-aim-ui/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-aim-ui-package
+          path: python-aim-ui/*.pkg.tar.zst
+
+  python-base58:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-base58.git
+
+      - name: give build user perms
+        run: chown -R build:build python-base58
+
+      - name: build in clean chroot
+        run: su build -c "cd python-base58 && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-base58/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-base58-package
+          path: python-base58/*.pkg.tar.zst
+
+  python-aimrocks:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-aimrocks.git
+
+      - name: give build user perms
+        run: chown -R build:build python-aimrocks
+
+      - name: build in clean chroot
+        run: su build -c "cd python-aimrocks && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-aimrocks/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-aimrocks-package
+          path: python-aimrocks/*.pkg.tar.zst
+
+  python-py3nvml:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-py3nvml.git
+
+      - name: give build user perms
+        run: chown -R build:build python-py3nvml
+
+      - name: build in clean chroot
+        run: su build -c "cd python-py3nvml && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-py3nvml/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-py3nvml-package
+          path: python-py3nvml/*.pkg.tar.zst
+
+  python-backoff:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-backoff.git
+
+      - name: give build user perms
+        run: chown -R build:build python-backoff
+
+      - name: build in clean chroot
+        run: su build -c "cd python-backoff && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-backoff/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-backoff-package
+          path: python-backoff/*.pkg.tar.zst
+
+  python-injector:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-injector.git
+
+      - name: give build user perms
+        run: chown -R build:build python-injector
+
+      - name: build in clean chroot
+        run: su build -c "cd python-injector && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-injector/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-injector-package
+          path: python-injector/*.pkg.tar.zst
+
+  libudev0:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/libudev0.git
+
+      - name: give build user perms
+        run: chown -R build:build libudev0
+
+      - name: build in clean chroot
+        run: su build -c "cd libudev0 && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' libudev0/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: libudev0-package
+          path: libudev0/*.pkg.tar.zst
+
+  python-pid:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pid.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pid
+
+      - name: build in clean chroot
+        run: su build -c "cd python-pid && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-pid/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pid-package
+          path: python-pid/*.pkg.tar.zst
+
+  gconf:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/gconf.git
+
+      - name: give build user perms
+        run: chown -R build:build gconf
+
+      - name: build in clean chroot
+        run: su build -c "cd gconf && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' gconf/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: gconf-package
+          path: gconf/*.pkg.tar.zst
+
+  python-datalad:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: [patool, python-annexremote, python-looseversion, python-types-requests]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download patool
+        uses: actions/download-artifact@v4
+        with:
+          name: patool-package
+
+      - name: download python-annexremote
+        uses: actions/download-artifact@v4
+        with:
+          name: python-annexremote-package
+
+      - name: download python-looseversion
+        uses: actions/download-artifact@v4
+        with:
+          name: python-looseversion-package
+
+      - name: download python-types-requests
+        uses: actions/download-artifact@v4
+        with:
+          name: python-types-requests-package
 
       - name: install packages
         run: pacman -U *.pkg.tar.zst --noconfirm
-      
+
       - name: download package
-        run: git clone https://aur.archlinux.org/paxs.git
+        run: git clone https://aur.archlinux.org/python-datalad.git
 
       - name: give build user perms
-        run: chown -R build:build paxs
+        run: chown -R build:build python-datalad
 
       - name: build in clean chroot
-        run: su build -c "cd paxs && makepkg -s --noconfirm"
+        run: su build -c "cd python-datalad && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-datalad/*.pkg.tar.zst
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: paxs-package
-          path: paxs/*.pkg.tar.zst
-          
-  pcmn-git:
+          name: python-datalad-package
+          path: python-datalad/*.pkg.tar.zst
+
+  python-segment-analytics:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    needs: yay
+    needs: python-backoff
 
     container:
       image: archlinux
       options: --privileged
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: update pacman
         run: pacman -Syu --noconfirm
@@ -433,38 +1087,43 @@ jobs:
       - name: give build unlimited power
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
-          
-      - name: download yay
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: yay-package
 
-      - name: install yay
+      - name: download python-backoff
+        uses: actions/download-artifact@v4
+        with:
+          name: python-backoff-package
+
+      - name: install packages
         run: pacman -U *.pkg.tar.zst --noconfirm
-      
+
       - name: download package
-        run: git clone https://aur.archlinux.org/pcmn-git.git
+        run: git clone https://aur.archlinux.org/python-segment-analytics.git
 
       - name: give build user perms
-        run: chown -R build:build pcmn-git
+        run: chown -R build:build python-segment-analytics
 
       - name: build in clean chroot
-        run: su build -c "cd pcmn-git && makepkg -s --noconfirm"
+        run: su build -c "cd python-segment-analytics && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' python-segment-analytics/*.pkg.tar.zst
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: pcmn-git-package
-          path: pcmn-git/*.pkg.tar.zst
-          
-  pkm:
+          name: python-segment-analytics-package
+          path: python-segment-analytics/*.pkg.tar.zst
+
+  gkraken:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    needs: yay
+    needs: python-injector
 
     container:
       image: archlinux
       options: --privileged
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: update pacman
         run: pacman -Syu --noconfirm
@@ -478,38 +1137,43 @@ jobs:
       - name: give build unlimited power
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
-          
-      - name: download yay
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: yay-package
 
-      - name: install yay
+      - name: download python-injector
+        uses: actions/download-artifact@v4
+        with:
+          name: python-injector-package
+
+      - name: install packages
         run: pacman -U *.pkg.tar.zst --noconfirm
-      
+
       - name: download package
-        run: git clone https://aur.archlinux.org/pkm.git
+        run: git clone https://aur.archlinux.org/gkraken.git
 
       - name: give build user perms
-        run: chown -R build:build pkm
+        run: chown -R build:build gkraken
 
       - name: build in clean chroot
-        run: su build -c "cd pkm && makepkg -s --noconfirm"
+        run: su build -c "cd gkraken && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' gkraken/*.pkg.tar.zst
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: pkm-package
-          path: pkm/*.pkg.tar.zst
-          
-  spm-arch:
+          name: gkraken-package
+          path: gkraken/*.pkg.tar.zst
+
+  gst:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    needs: yay
+    needs: python-injector
 
     container:
       image: archlinux
       options: --privileged
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: update pacman
         run: pacman -Syu --noconfirm
@@ -523,38 +1187,43 @@ jobs:
       - name: give build unlimited power
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
-          
-      - name: download yay
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: yay-package
 
-      - name: install yay
+      - name: download python-injector
+        uses: actions/download-artifact@v4
+        with:
+          name: python-injector-package
+
+      - name: install packages
         run: pacman -U *.pkg.tar.zst --noconfirm
-      
+
       - name: download package
-        run: git clone https://aur.archlinux.org/spm-arch.git
+        run: git clone https://aur.archlinux.org/gst.git
 
       - name: give build user perms
-        run: chown -R build:build spm-arch
+        run: chown -R build:build gst
 
       - name: build in clean chroot
-        run: su build -c "cd spm-arch && makepkg -s --noconfirm"
+        run: su build -c "cd gst && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' gst/*.pkg.tar.zst
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: spm-arch-package
-          path: spm-arch/*.pkg.tar.zst
-          
-  ualsv:
+          name: gst-package
+          path: gst/*.pkg.tar.zst
+
+  chatstack:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    needs: yay
+    needs: [gconf, libudev0]
 
     container:
       image: archlinux
       options: --privileged
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: update pacman
         run: pacman -Syu --noconfirm
@@ -568,38 +1237,48 @@ jobs:
       - name: give build unlimited power
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
-          
-      - name: download yay
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: yay-package
 
-      - name: install yay
+      - name: download gconf
+        uses: actions/download-artifact@v4
+        with:
+          name: gconf-package
+
+      - name: download libudev0
+        uses: actions/download-artifact@v4
+        with:
+          name: libudev0-package
+
+      - name: install packages
         run: pacman -U *.pkg.tar.zst --noconfirm
-      
+
       - name: download package
-        run: git clone https://aur.archlinux.org/ualsv.git
+        run: git clone https://aur.archlinux.org/chatstack.git
 
       - name: give build user perms
-        run: chown -R build:build ualsv
+        run: chown -R build:build chatstack
 
       - name: build in clean chroot
-        run: su build -c "cd ualsv && makepkg -s --noconfirm"
+        run: su build -c "cd chatstack && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' chatstack/*.pkg.tar.zst
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: ualsv-package
-          path: ualsv/*.pkg.tar.zst
-          
-  yayfzf:
+          name: chatstack-package
+          path: chatstack/*.pkg.tar.zst
+
+  minivcmouse:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    needs: yay
+    needs: libudev0
 
     container:
       image: archlinux
       options: --privileged
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: update pacman
         run: pacman -Syu --noconfirm
@@ -613,26 +1292,344 @@ jobs:
       - name: give build unlimited power
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
-          
-      - name: download yay
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: yay-package
 
-      - name: install yay
+      - name: download libudev0
+        uses: actions/download-artifact@v4
+        with:
+          name: libudev0-package
+
+      - name: install packages
         run: pacman -U *.pkg.tar.zst --noconfirm
-      
+
       - name: download package
-        run: git clone https://aur.archlinux.org/yayfzf.git
+        run: git clone https://aur.archlinux.org/minivcmouse.git
 
       - name: give build user perms
-        run: chown -R build:build yayfzf
+        run: chown -R build:build minivcmouse
 
       - name: build in clean chroot
-        run: su build -c "cd yayfzf && makepkg -s --noconfirm"
+        run: su build -c "cd minivcmouse && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' minivcmouse/*.pkg.tar.zst
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: yayfzf-package
-          path: yayfzf/*.pkg.tar.zst
+          name: minivcmouse-package
+          path: minivcmouse/*.pkg.tar.zst
+
+  gx52:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: [python-injector, libudev0]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download python-injector
+        uses: actions/download-artifact@v4
+        with:
+          name: python-injector-package
+
+      - name: download libudev0
+        uses: actions/download-artifact@v4
+        with:
+          name: libudev0-package
+
+      - name: install packages
+        run: pacman -U *.pkg.tar.zst --noconfirm
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/gx52.git
+
+      - name: give build user perms
+        run: chown -R build:build gx52
+
+      - name: build in clean chroot
+        run: su build -c "cd gx52 && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' gx52/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: gx52-package
+          path: gx52/*.pkg.tar.zst
+
+  bottles:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: [icoextract, patool, python-fvs, python-pathvalidate, python-steamgriddb, vkbasalt-cli]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download icoextract
+        uses: actions/download-artifact@v4
+        with:
+          name: icoextract-package
+
+      - name: download patool
+        uses: actions/download-artifact@v4
+        with:
+          name: patool-package
+
+      - name: download python-fvs
+        uses: actions/download-artifact@v4
+        with:
+          name: python-fvs-package
+
+      - name: download python-pathvalidate
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pathvalidate-package
+
+      - name: download python-steamgriddb
+        uses: actions/download-artifact@v4
+        with:
+          name: python-steamgriddb-package
+
+      - name: download vkbasalt-cli
+        uses: actions/download-artifact@v4
+        with:
+          name: vkbasalt-cli-package
+
+      - name: install packages
+        run: pacman -U *.pkg.tar.zst --noconfirm
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/bottles.git
+
+      - name: give build user perms
+        run: chown -R build:build bottles
+
+      - name: build in clean chroot
+        run: su build -c "cd bottles && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' bottles/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: bottles-package
+          path: bottles/*.pkg.tar.zst
+
+  bottles-git:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: [icoextract, patool, python-fvs, python-pathvalidate, python-steamgriddb, vkbasalt-cli]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download icoextract
+        uses: actions/download-artifact@v4
+        with:
+          name: icoextract-package
+
+      - name: download patool
+        uses: actions/download-artifact@v4
+        with:
+          name: patool-package
+
+      - name: download python-fvs
+        uses: actions/download-artifact@v4
+        with:
+          name: python-fvs-package
+
+      - name: download python-pathvalidate
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pathvalidate-package
+
+      - name: download python-steamgriddb
+        uses: actions/download-artifact@v4
+        with:
+          name: python-steamgriddb-package
+
+      - name: download vkbasalt-cli
+        uses: actions/download-artifact@v4
+        with:
+          name: vkbasalt-cli-package
+
+      - name: install packages
+        run: pacman -U *.pkg.tar.zst --noconfirm
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/bottles-git.git
+
+      - name: give build user perms
+        run: chown -R build:build bottles-git
+
+      - name: build in clean chroot
+        run: su build -c "cd bottles-git && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' bottles-git/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: bottles-git-package
+          path: bottles-git/*.pkg.tar.zst
+
+  faugus-launcher:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: [icoextract, python-pynput]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download icoextract
+        uses: actions/download-artifact@v4
+        with:
+          name: icoextract-package
+
+      - name: download python-pynput
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pynput-package
+
+      - name: install packages
+        run: pacman -U *.pkg.tar.zst --noconfirm
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/faugus-launcher.git
+
+      - name: give build user perms
+        run: chown -R build:build faugus-launcher
+
+      - name: build in clean chroot
+        run: su build -c "cd faugus-launcher && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' faugus-launcher/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: faugus-launcher-package
+          path: faugus-launcher/*.pkg.tar.zst
+
+  faugus-launcher-git:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: [icoextract, python-pynput]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download icoextract
+        uses: actions/download-artifact@v4
+        with:
+          name: icoextract-package
+
+      - name: download python-pynput
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pynput-package
+
+      - name: install packages
+        run: pacman -U *.pkg.tar.zst --noconfirm
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/faugus-launcher-git.git
+
+      - name: give build user perms
+        run: chown -R build:build faugus-launcher-git
+
+      - name: build in clean chroot
+        run: su build -c "cd faugus-launcher-git && makepkg -s --noconfirm"
+
+      - name: remove colons
+        run: rename 's|:|-|g' faugus-launcher-git/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: faugus-launcher-git-package
+          path: faugus-launcher-git/*.pkg.tar.zst
