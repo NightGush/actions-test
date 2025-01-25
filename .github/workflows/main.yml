@@ -1,0 +1,92 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  prepare-build-environment:
+    name: Prepare Build Environment
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux
+      options: --privileged
+    steps:
+      - name: Update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: Install build tools
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: Add build user
+        run: useradd -m build
+
+      - name: Give build user sudo permissions
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+  build-packages:
+    name: Build Packages
+    runs-on: ubuntu-latest
+    needs: prepare-build-environment
+    container:
+      image: archlinux
+      options: --privileged
+    strategy:
+      matrix:
+        package: [yay, snapd, axu, blender-launcher-git, checkupdatify, etwas, idos-package-updater-script, pak-git, pcmn-git, pkm, spm-arch, ualsv, yayfzf]
+    steps:
+      - name: Checkout Package Repository
+        run: git clone https://aur.archlinux.org/${{ matrix.package }}.git
+
+      - name: Set Permissions for Build User
+        run: chown -R build:build ${{ matrix.package }}
+
+      - name: Build Package in Clean Chroot
+        run: su build -c "cd ${{ matrix.package }} && makepkg -s --noconfirm"
+
+      - name: Upload Package Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: ${{ matrix.package }}-package
+          path: ${{ matrix.package }}/*.pkg.tar.zst
+
+  build-paxs:
+    name: Build paxs
+    runs-on: ubuntu-latest
+    needs: [prepare-build-environment, build-packages] # Depend on both preparation and other packages (for yay/snapd)
+    container:
+      image: archlinux
+      options: --privileged
+    steps:
+      - name: Download yay and snapd packages
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: yay-package
+          path: packages/yay
+      - uses: actions/download-artifact@v4.1.8
+        with:
+          name: snapd-package
+          path: packages/snapd
+
+      - name: Install yay and snapd
+        run: pacman -U packages/*/*.pkg.tar.zst --noconfirm
+        working-directory: ./packages # Important to execute pacman in the correct dir
+
+      - name: Checkout paxs Repository
+        run: git clone https://aur.archlinux.org/paxs.git
+
+      - name: Set Permissions for Build User (paxs)
+        run: chown -R build:build paxs
+
+      - name: Build paxs in Clean Chroot
+        run: su build -c "cd paxs && makepkg -s --noconfirm"
+
+      - name: Upload paxs Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: paxs-package
+          path: paxs/*.pkg.tar.zst
