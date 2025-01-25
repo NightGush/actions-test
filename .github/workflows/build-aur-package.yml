@@ -34,17 +34,30 @@ jobs:
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
 
-      - name: Download and install dependencies
+      - name: Generate Download Steps
         if: ${{ inputs.dependencies != '' }}
-        uses: actions/download-artifact@v4
-        with:
-          name: '*package' # pattern to download all dependencies
-          path: ${{ runner.temp }}/dependencies # extract to a common folder
-      
+        id: generate_download_steps
+        run: |
+          DEPENDENCIES="${{ inputs.dependencies }}"
+          IFS=',' read -r -a DEPENDENCY_LIST <<< "$DEPENDENCIES"
+
+          for dep in "${DEPENDENCY_LIST[@]}"; do
+            artifact_name="${dep}-package"
+            download_path="${{ runner.temp }}/dependencies/$dep"
+            mkdir -p "$download_path"
+
+            echo "::add-step name=Download artifact - $dep"
+            echo "::add-step uses=actions/download-artifact@v4"
+            echo "::add-step with.name=$artifact_name"
+            echo "::add-step with.path=$download_path"
+            echo "::end-step"
+          done
+
       - name: install packages
         if: ${{ inputs.dependencies != '' }}
         run: |
-          pacman -U ${{ runner.temp }}/dependencies/*/*.pkg.tar.zst --noconfirm
+          ls -R ${{ runner.temp }}/dependencies/
+          pacman -U ${{ runner.temp }}/dependencies/*/*/*.pkg.tar.zst --noconfirm
 
       - name: Download package
         run: git clone https://aur.archlinux.org/${{ inputs.package_name }}.git
