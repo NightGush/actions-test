@@ -8,7 +8,7 @@ on:
         required: true
         type: string
       dependencies:
-        description: 'Comma-separated list of package dependencies'
+        description: 'Comma-separated list of package dependency names (without -package suffix)'
         required: false
         type: string
         default: ''
@@ -26,22 +26,25 @@ jobs:
 
       - name: Install dependencies
         run: pacman -S git base-devel devtools --noconfirm
-      
+
       - name: Add build user
         run: useradd -m build
 
       - name: Give build unlimited power
-        run: echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
 
       - name: Download and install dependencies
         if: ${{ inputs.dependencies != '' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: '*package' # pattern to download all dependencies
+          path: ${{ runner.temp }}/dependencies # extract to a common folder
+      
+      - name: install packages
+        if: ${{ inputs.dependencies != '' }}
         run: |
-          IFS=',' read -ra deps <<< "${{ inputs.dependencies }}"
-          for dep in "${deps[@]}"; do
-            echo "Downloading $dep"
-            curl -LO "https://github.com/gromit1/testing-action/releases/download/latest/${dep}-package.tar.zst"
-          done
-          pacman -U ./*.pkg.tar.zst --noconfirm
+          pacman -U ${{ runner.temp }}/dependencies/*/*.pkg.tar.zst --noconfirm
 
       - name: Download package
         run: git clone https://aur.archlinux.org/${{ inputs.package_name }}.git
@@ -57,7 +60,7 @@ jobs:
           find ${{ inputs.package_name }} -name "*.pkg.tar.zst" -print0 | xargs -0 -I {} sh -c 'mv "{}" "$(echo "{}" | tr ":" "-")"'
 
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v4.6.0
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.package_name }}-package
           path: ${{ inputs.package_name }}/*.pkg.tar.zst
