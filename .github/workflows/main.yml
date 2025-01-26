@@ -1,111 +1,58 @@
+# This is a basic workflow to help you get started with Actions
+
 name: CI
 
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
+  yay:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        package:
-          - yay
-          - snapd
-          - axu
-          - blender-launcher-git
-          - checkupdatify
-          - etwas
-          - idos-package-updater-script
-          - pak-git
-          - paxs
-          - pcmn-git
-          - pkm
-          - spm-arch
-          - ualsv
+
     container:
       image: archlinux
       options: --privileged
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Update pacman
+      - name: update pacman
         run: pacman -Syu --noconfirm
 
-      - name: Install build dependencies
+      - name: install git
         run: pacman -S git base-devel devtools --noconfirm
 
-      - name: Add build user
+      - name: add build user
         run: useradd -m build
 
-      - name: Grant build user sudo permissions
+      - name: give build unlimited power
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/yay.git
 
-      - name: Download package
-        run: git clone https://aur.archlinux.org/${{ matrix.package }}.git
+      - name: give build user perms
+        run: chown -R build:build yay
 
-      - name: Set permissions for build user
-        run: chown -R build:build ${{ matrix.package }}
+      - name: build package
+        run: su build -c "cd yay && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: |
+          find python-fvs -name "*.pkg.tar.zst" -print0 | xargs -0 -I {} sh -c 'mv "{}" "$(echo "{}" | tr ":" "-")"'
 
-      - name: Build package
-        run: su build -c "cd ${{ matrix.package }} && makepkg -s --noconfirm"
-
-      - name: Upload package artifact
+      - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
-        with:
-          name: ${{ matrix.package }}-package
-          path: ${{ matrix.package }}/*.pkg.tar.zst
-
-  dependent-builds:
-    runs-on: ubuntu-latest
-    needs: build
-    strategy:
-      matrix:
-        dependent_package:
-          - paxs
-    container:
-      image: archlinux
-      options: --privileged
-    steps:
-      - name: Update pacman
-        run: pacman -Syu --noconfirm
-
-      - name: Install build dependencies
-        run: pacman -S git base-devel devtools --noconfirm
-
-      - name: Add build user
-        run: useradd -m build
-
-      - name: Grant build user sudo permissions
-        run: |
-          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
-
-      - name: Download artifacts (yay)
-        uses: actions/download-artifact@v4.1.8
         with:
           name: yay-package
-
-      - name: Download artifacts (snapd)
-        uses: actions/download-artifact@v4.1.8
-        with:
-          name: snapd-package
-
-      - name: Install packages
-        run: pacman -U *.pkg.tar.zst --noconfirm
-
-      - name: Download dependent package
-        run: git clone https://aur.archlinux.org/${{ matrix.dependent_package }}.git
-
-      - name: Set permissions for build user
-        run: chown -R build:build ${{ matrix.dependent_package }}
-
-      - name: Build dependent package
-        run: su build -c "cd ${{ matrix.dependent_package }} && makepkg -s --noconfirm"
-
-      - name: Upload dependent package artifact
-        uses: actions/upload-artifact@v4.6.0
-        with:
-          name: ${{ matrix.dependent_package }}-package
-          path: ${{ matrix.dependent_package }}/*.pkg.tar.zst
+          path: yay/*.pkg.tar.zst
