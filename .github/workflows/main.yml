@@ -1,5 +1,3 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
 # Controls when the workflow will run
@@ -29,7 +27,7 @@ jobs:
         run: pacman -Syu --noconfirm
 
       - name: install git
-        run: pacman -S git base-devel devtools --noconfirm
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
 
       - name: add build user
         run: useradd -m build
@@ -48,8 +46,7 @@ jobs:
         run: su build -c "cd yay && makepkg -s --noconfirm"
     
       - name: remove colons
-        run: |
-          find yay -name "*.pkg.tar.zst" -print0 | xargs -0 -I {} sh -c 'mv "{}" "$(echo "{}" | tr ":" "-")"'
+        run: perl-rename 's|:|-|g' yay/*.pkg.tar.zst
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
