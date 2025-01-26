@@ -49,7 +49,7 @@ jobs:
     
       - name: remove colons
         run: |
-          find python-fvs -name "*.pkg.tar.zst" -print0 | xargs -0 -I {} sh -c 'mv "{}" "$(echo "{}" | tr ":" "-")"'
+          find yay -name "*.pkg.tar.zst" -print0 | xargs -0 -I {} sh -c 'mv "{}" "$(echo "{}" | tr ":" "-")"'
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
