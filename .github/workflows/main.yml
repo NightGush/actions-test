@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  yay:
+  icoextract:
     runs-on: ubuntu-latest
 
     container:
@@ -29,19 +29,4707 @@ jobs:
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
       
       - name: download package
-        run: git clone https://aur.archlinux.org/yay.git
+        run: git clone https://aur.archlinux.org/icoextract.git
 
       - name: give build user perms
-        run: chown -R build:build yay
+        run: chown -R build:build icoextract
 
       - name: build package
-        run: su build -c "cd yay && makepkg -s --noconfirm"
+        run: su build -c "cd icoextract && makepkg -s --noconfirm"
     
       - name: remove colons
-        run: perl-rename 's|:|-|g' yay/*.pkg.tar.zst
+        run: perl-rename 's|:|-|g' icoextract/*.pkg.tar.zst
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: yay-package
-          path: yay/*.pkg.tar.zst
+          name: icoextract-package
+          path: icoextract/*.pkg.tar.zst
+  patool:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/patool.git
+
+      - name: give build user perms
+        run: chown -R build:build patool
+
+      - name: build package
+        run: su build -c "cd patool && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' patool/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: patool-package
+          path: patool/*.pkg.tar.zst
+  python-fvs:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-fvs.git
+
+      - name: give build user perms
+        run: chown -R build:build python-fvs
+
+      - name: build package
+        run: su build -c "cd python-fvs && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-fvs/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-fvs-package
+          path: python-fvs/*.pkg.tar.zst
+  python-pathvalidate:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pathvalidate.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pathvalidate
+
+      - name: build package
+        run: su build -c "cd python-pathvalidate && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-pathvalidate/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pathvalidate-package
+          path: python-pathvalidate/*.pkg.tar.zst
+  python-steamgriddb:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-steamgriddb.git
+
+      - name: give build user perms
+        run: chown -R build:build python-steamgriddb
+
+      - name: build package
+        run: su build -c "cd python-steamgriddb && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-steamgriddb/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-steamgriddb-package
+          path: python-steamgriddb/*.pkg.tar.zst
+  vkbasalt-cli:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/vkbasalt-cli.git
+
+      - name: give build user perms
+        run: chown -R build:build vkbasalt-cli
+
+      - name: build package
+        run: su build -c "cd vkbasalt-cli && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' vkbasalt-cli/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: vkbasalt-cli-package
+          path: vkbasalt-cli/*.pkg.tar.zst
+  python-pynput:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pynput.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pynput
+
+      - name: build package
+        run: su build -c "cd python-pynput && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-pynput/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pynput-package
+          path: python-pynput/*.pkg.tar.zst
+  python-python-sat:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-python-sat.git
+
+      - name: give build user perms
+        run: chown -R build:build python-python-sat
+
+      - name: build package
+        run: su build -c "cd python-python-sat && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-python-sat/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-python-sat-package
+          path: python-python-sat/*.pkg.tar.zst
+  python-rply:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-rply.git
+
+      - name: give build user perms
+        run: chown -R build:build python-rply
+
+      - name: build package
+        run: su build -c "cd python-rply && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-rply/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-rply-package
+          path: python-rply/*.pkg.tar.zst
+  python-pytest-runner:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pytest-runner.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pytest-runner
+
+      - name: build package
+        run: su build -c "cd python-pytest-runner && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-pytest-runner/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pytest-runner-package
+          path: python-pytest-runner/*.pkg.tar.zst
+  python-html-sanitizer:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-html-sanitizer.git
+
+      - name: give build user perms
+        run: chown -R build:build python-html-sanitizer
+
+      - name: build package
+        run: su build -c "cd python-html-sanitizer && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-html-sanitizer/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-html-sanitizer-package
+          path: python-html-sanitizer/*.pkg.tar.zst
+  python-matrix-nio:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-matrix-nio.git
+
+      - name: give build user perms
+        run: chown -R build:build python-matrix-nio
+
+      - name: build package
+        run: su build -c "cd python-matrix-nio && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-matrix-nio/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-matrix-nio-package
+          path: python-matrix-nio/*.pkg.tar.zst
+  python-plyer:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-plyer.git
+
+      - name: give build user perms
+        run: chown -R build:build python-plyer
+
+      - name: build package
+        run: su build -c "cd python-plyer && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-plyer/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-plyer-package
+          path: python-plyer/*.pkg.tar.zst
+  python-pfzy:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pfzy.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pfzy
+
+      - name: build package
+        run: su build -c "cd python-pfzy && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-pfzy/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pfzy-package
+          path: python-pfzy/*.pkg.tar.zst
+  python-types-pyyaml:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-types-pyyaml.git
+
+      - name: give build user perms
+        run: chown -R build:build python-types-pyyaml
+
+      - name: build package
+        run: su build -c "cd python-types-pyyaml && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-types-pyyaml/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-types-pyyaml-package
+          path: python-types-pyyaml/*.pkg.tar.zst
+  python-plum:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-plum.git
+
+      - name: give build user perms
+        run: chown -R build:build python-plum
+
+      - name: build package
+        run: su build -c "cd python-plum && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-plum/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-plum-package
+          path: python-plum/*.pkg.tar.zst
+  python-rectangle-packer:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-rectangle-packer.git
+
+      - name: give build user perms
+        run: chown -R build:build python-rectangle-packer
+
+      - name: build package
+        run: su build -c "cd python-rectangle-packer && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-rectangle-packer/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-rectangle-packer-package
+          path: python-rectangle-packer/*.pkg.tar.zst
+  python-types-requests:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-types-requests.git
+
+      - name: give build user perms
+        run: chown -R build:build python-types-requests
+
+      - name: build package
+        run: su build -c "cd python-types-requests && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-types-requests/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-types-requests-package
+          path: python-types-requests/*.pkg.tar.zst
+  python-annexremote:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-annexremote.git
+
+      - name: give build user perms
+        run: chown -R build:build python-annexremote
+
+      - name: build package
+        run: su build -c "cd python-annexremote && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-annexremote/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-annexremote-package
+          path: python-annexremote/*.pkg.tar.zst
+  python-mock:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-mock.git
+
+      - name: give build user perms
+        run: chown -R build:build python-mock
+
+      - name: build package
+        run: su build -c "cd python-mock && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-mock/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-mock-package
+          path: python-mock/*.pkg.tar.zst
+  python-dicomweb-client:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-dicomweb-client.git
+
+      - name: give build user perms
+        run: chown -R build:build python-dicomweb-client
+
+      - name: build package
+        run: su build -c "cd python-dicomweb-client && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-dicomweb-client/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-dicomweb-client-package
+          path: python-dicomweb-client/*.pkg.tar.zst
+  python-einops:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-einops.git
+
+      - name: give build user perms
+        run: chown -R build:build python-einops
+
+      - name: build package
+        run: su build -c "cd python-einops && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-einops/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-einops-package
+          path: python-einops/*.pkg.tar.zst
+  python-expiring-dict:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-expiring-dict.git
+
+      - name: give build user perms
+        run: chown -R build:build python-expiring-dict
+
+      - name: build package
+        run: su build -c "cd python-expiring-dict && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-expiring-dict/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-expiring-dict-package
+          path: python-expiring-dict/*.pkg.tar.zst
+  python-diskcache:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-diskcache.git
+
+      - name: give build user perms
+        run: chown -R build:build python-diskcache
+
+      - name: build package
+        run: su build -c "cd python-diskcache && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-diskcache/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-diskcache-package
+          path: python-diskcache/*.pkg.tar.zst
+  python-bitstruct:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-bitstruct.git
+
+      - name: give build user perms
+        run: chown -R build:build python-bitstruct
+
+      - name: build package
+        run: su build -c "cd python-bitstruct && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-bitstruct/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-bitstruct-package
+          path: python-bitstruct/*.pkg.tar.zst
+  python-datastruct:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-datastruct.git
+
+      - name: give build user perms
+        run: chown -R build:build python-datastruct
+
+      - name: build package
+        run: su build -c "cd python-datastruct && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-datastruct/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-datastruct-package
+          path: python-datastruct/*.pkg.tar.zst
+  python-xmodem:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-xmodem.git
+
+      - name: give build user perms
+        run: chown -R build:build python-xmodem
+
+      - name: build package
+        run: su build -c "cd python-xmodem && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-xmodem/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-xmodem-package
+          path: python-xmodem/*.pkg.tar.zst
+  python-crccheck:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-crccheck.git
+
+      - name: give build user perms
+        run: chown -R build:build python-crccheck
+
+      - name: build package
+        run: su build -c "cd python-crccheck && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-crccheck/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-crccheck-package
+          path: python-crccheck/*.pkg.tar.zst
+  python-pltable:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pltable.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pltable
+
+      - name: build package
+        run: su build -c "cd python-pltable && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-pltable/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pltable-package
+          path: python-pltable/*.pkg.tar.zst
+  python-argparse-addons:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-argparse-addons.git
+
+      - name: give build user perms
+        run: chown -R build:build python-argparse-addons
+
+      - name: build package
+        run: su build -c "cd python-argparse-addons && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-argparse-addons/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-argparse-addons-package
+          path: python-argparse-addons/*.pkg.tar.zst
+  python-pyenum:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pyenum.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pyenum
+
+      - name: build package
+        run: su build -c "cd python-pyenum && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-pyenum/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pyenum-package
+          path: python-pyenum/*.pkg.tar.zst
+  python-click-option-group:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-click-option-group.git
+
+      - name: give build user perms
+        run: chown -R build:build python-click-option-group
+
+      - name: build package
+        run: su build -c "cd python-click-option-group && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-click-option-group/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-click-option-group-package
+          path: python-click-option-group/*.pkg.tar.zst
+  python-click-params:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-click-params.git
+
+      - name: give build user perms
+        run: chown -R build:build python-click-params
+
+      - name: build package
+        run: su build -c "cd python-click-params && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-click-params/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-click-params-package
+          path: python-click-params/*.pkg.tar.zst
+  python-pytaglib:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pytaglib.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pytaglib
+
+      - name: build package
+        run: su build -c "cd python-pytaglib && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-pytaglib/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pytaglib-package
+          path: python-pytaglib/*.pkg.tar.zst
+  python-rich-click:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-rich-click.git
+
+      - name: give build user perms
+        run: chown -R build:build python-rich-click
+
+      - name: build package
+        run: su build -c "cd python-rich-click && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-rich-click/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-rich-click-package
+          path: python-rich-click/*.pkg.tar.zst
+  python-art:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-art.git
+
+      - name: give build user perms
+        run: chown -R build:build python-art
+
+      - name: build package
+        run: su build -c "cd python-art && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-art/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-art-package
+          path: python-art/*.pkg.tar.zst
+  python-rich-pixels:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-rich-pixels.git
+
+      - name: give build user perms
+        run: chown -R build:build python-rich-pixels
+
+      - name: build package
+        run: su build -c "cd python-rich-pixels && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-rich-pixels/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-rich-pixels-package
+          path: python-rich-pixels/*.pkg.tar.zst
+  python-aiosql:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-aiosql.git
+
+      - name: give build user perms
+        run: chown -R build:build python-aiosql
+
+      - name: build package
+        run: su build -c "cd python-aiosql && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-aiosql/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-aiosql-package
+          path: python-aiosql/*.pkg.tar.zst
+  python-ollama:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-ollama.git
+
+      - name: give build user perms
+        run: chown -R build:build python-ollama
+
+      - name: build package
+        run: su build -c "cd python-ollama && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-ollama/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-ollama-package
+          path: python-ollama/*.pkg.tar.zst
+  python-click-default-group:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-click-default-group.git
+
+      - name: give build user perms
+        run: chown -R build:build python-click-default-group
+
+      - name: build package
+        run: su build -c "cd python-click-default-group && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-click-default-group/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-click-default-group-package
+          path: python-click-default-group/*.pkg.tar.zst
+  python-sqlite-fts4:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-sqlite-fts4.git
+
+      - name: give build user perms
+        run: chown -R build:build python-sqlite-fts4
+
+      - name: build package
+        run: su build -c "cd python-sqlite-fts4 && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-sqlite-fts4/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-sqlite-fts4-package
+          path: python-sqlite-fts4/*.pkg.tar.zst
+  python-terminaltexteffects:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-terminaltexteffects.git
+
+      - name: give build user perms
+        run: chown -R build:build python-terminaltexteffects
+
+      - name: build package
+        run: su build -c "cd python-terminaltexteffects && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-terminaltexteffects/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-terminaltexteffects-package
+          path: python-terminaltexteffects/*.pkg.tar.zst
+  python-universal_pathlib:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-universal_pathlib.git
+
+      - name: give build user perms
+        run: chown -R build:build python-universal_pathlib
+
+      - name: build package
+        run: su build -c "cd python-universal_pathlib && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-universal_pathlib/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-universal_pathlib-package
+          path: python-universal_pathlib/*.pkg.tar.zst
+  python-aenum:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-aenum.git
+
+      - name: give build user perms
+        run: chown -R build:build python-aenum
+
+      - name: build package
+        run: su build -c "cd python-aenum && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-aenum/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-aenum-package
+          path: python-aenum/*.pkg.tar.zst
+  python-pyephem:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pyephem.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pyephem
+
+      - name: build package
+        run: su build -c "cd python-pyephem && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-pyephem/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pyephem-package
+          path: python-pyephem/*.pkg.tar.zst
+  python-lunardate:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-lunardate.git
+
+      - name: give build user perms
+        run: chown -R build:build python-lunardate
+
+      - name: build package
+        run: su build -c "cd python-lunardate && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-lunardate/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-lunardate-package
+          path: python-lunardate/*.pkg.tar.zst
+  python-pyshp:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pyshp.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pyshp
+
+      - name: build package
+        run: su build -c "cd python-pyshp && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-pyshp/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pyshp-package
+          path: python-pyshp/*.pkg.tar.zst
+  python-narwhals:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-narwhals.git
+
+      - name: give build user perms
+        run: chown -R build:build python-narwhals
+
+      - name: build package
+        run: su build -c "cd python-narwhals && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-narwhals/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-narwhals-package
+          path: python-narwhals/*.pkg.tar.zst
+  python-ffmpy:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-ffmpy.git
+
+      - name: give build user perms
+        run: chown -R build:build python-ffmpy
+
+      - name: build package
+        run: su build -c "cd python-ffmpy && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-ffmpy/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-ffmpy-package
+          path: python-ffmpy/*.pkg.tar.zst
+  python-pyogg:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pyogg.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pyogg
+
+      - name: build package
+        run: su build -c "cd python-pyogg && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-pyogg/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pyogg-package
+          path: python-pyogg/*.pkg.tar.zst
+  python-music-tag:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-music-tag.git
+
+      - name: give build user perms
+        run: chown -R build:build python-music-tag
+
+      - name: build package
+        run: su build -c "cd python-music-tag && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-music-tag/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-music-tag-package
+          path: python-music-tag/*.pkg.tar.zst
+  python-pwinput:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pwinput.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pwinput
+
+      - name: build package
+        run: su build -c "cd python-pwinput && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-pwinput/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pwinput-package
+          path: python-pwinput/*.pkg.tar.zst
+  python-gradio-client:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-gradio-client.git
+
+      - name: give build user perms
+        run: chown -R build:build python-gradio-client
+
+      - name: build package
+        run: su build -c "cd python-gradio-client && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-gradio-client/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-gradio-client-package
+          path: python-gradio-client/*.pkg.tar.zst
+  python-audioop-lts:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-audioop-lts.git
+
+      - name: give build user perms
+        run: chown -R build:build python-audioop-lts
+
+      - name: build package
+        run: su build -c "cd python-audioop-lts && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-audioop-lts/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-audioop-lts-package
+          path: python-audioop-lts/*.pkg.tar.zst
+  hivision-id-photos-modnet:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/hivision-id-photos-modnet.git
+
+      - name: give build user perms
+        run: chown -R build:build hivision-id-photos-modnet
+
+      - name: build package
+        run: su build -c "cd hivision-id-photos-modnet && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' hivision-id-photos-modnet/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: hivision-id-photos-modnet-package
+          path: hivision-id-photos-modnet/*.pkg.tar.zst
+  python-mtcnn-runtime:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-mtcnn-runtime.git
+
+      - name: give build user perms
+        run: chown -R build:build python-mtcnn-runtime
+
+      - name: build package
+        run: su build -c "cd python-mtcnn-runtime && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-mtcnn-runtime/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-mtcnn-runtime-package
+          path: python-mtcnn-runtime/*.pkg.tar.zst
+  python-asyncer:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-asyncer.git
+
+      - name: give build user perms
+        run: chown -R build:build python-asyncer
+
+      - name: build package
+        run: su build -c "cd python-asyncer && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-asyncer/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-asyncer-package
+          path: python-asyncer/*.pkg.tar.zst
+  python-numpy1:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-numpy1.git
+
+      - name: give build user perms
+        run: chown -R build:build python-numpy1
+
+      - name: build package
+        run: su build -c "cd python-numpy1 && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-numpy1/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-numpy1-package
+          path: python-numpy1/*.pkg.tar.zst
+  python-pymatting:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pymatting.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pymatting
+
+      - name: build package
+        run: su build -c "cd python-pymatting && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-pymatting/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pymatting-package
+          path: python-pymatting/*.pkg.tar.zst
+  python-imageio:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-imageio.git
+
+      - name: give build user perms
+        run: chown -R build:build python-imageio
+
+      - name: build package
+        run: su build -c "cd python-imageio && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-imageio/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-imageio-package
+          path: python-imageio/*.pkg.tar.zst
+  brunsli:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/brunsli.git
+
+      - name: give build user perms
+        run: chown -R build:build brunsli
+
+      - name: build package
+        run: su build -c "cd brunsli && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' brunsli/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: brunsli-package
+          path: brunsli/*.pkg.tar.zst
+  charls:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/charls.git
+
+      - name: give build user perms
+        run: chown -R build:build charls
+
+      - name: build package
+        run: su build -c "cd charls && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' charls/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: charls-package
+          path: charls/*.pkg.tar.zst
+  lerc:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/lerc.git
+
+      - name: give build user perms
+        run: chown -R build:build lerc
+
+      - name: build package
+        run: su build -c "cd lerc && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' lerc/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: lerc-package
+          path: lerc/*.pkg.tar.zst
+  lzfse:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/lzfse.git
+
+      - name: give build user perms
+        run: chown -R build:build lzfse
+
+      - name: build package
+        run: su build -c "cd lzfse && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' lzfse/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: lzfse-package
+          path: lzfse/*.pkg.tar.zst
+  aces-container:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/aces-container.git
+
+      - name: give build user perms
+        run: chown -R build:build aces-container
+
+      - name: build package
+        run: su build -c "cd aces-container && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' aces-container/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: aces-container-package
+          path: aces-container/*.pkg.tar.zst
+  python-openexr:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-openexr.git
+
+      - name: give build user perms
+        run: chown -R build:build python-openexr
+
+      - name: build package
+        run: su build -c "cd python-openexr && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-openexr/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-openexr-package
+          path: python-openexr/*.pkg.tar.zst
+  siril:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/siril.git
+
+      - name: give build user perms
+        run: chown -R build:build siril
+
+      - name: build package
+        run: su build -c "cd siril && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' siril/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: siril-package
+          path: siril/*.pkg.tar.zst
+  napari-console:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/napari-console.git
+
+      - name: give build user perms
+        run: chown -R build:build napari-console
+
+      - name: build package
+        run: su build -c "cd napari-console && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' napari-console/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: napari-console-package
+          path: napari-console/*.pkg.tar.zst
+
+
+  bottles:
+    runs-on: ubuntu-latest
+    needs: [icoextract, patool, python-fvs, python-pathvalidate, python-steamgriddb, vkbasalt-cli]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download icoextract
+        uses: actions/download-artifact@v4
+        with:
+          name: icoextract-package
+
+      - name: download patool
+        uses: actions/download-artifact@v4
+        with:
+          name: patool-package
+
+      - name: download python-fvs
+        uses: actions/download-artifact@v4
+        with:
+          name: python-fvs-package
+
+      - name: download python-pathvalidate
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pathvalidate-package
+
+      - name: download python-steamgriddb
+        uses: actions/download-artifact@v4
+        with:
+          name: python-steamgriddb-package
+
+      - name: download vkbasalt-cli
+        uses: actions/download-artifact@v4
+        with:
+          name: vkbasalt-cli-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/bottles.git
+
+      - name: give build user perms
+        run: chown -R build:build bottles
+
+      - name: build package
+        run: su build -c "cd bottles && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' bottles/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: bottles-package
+          path: bottles/*.pkg.tar.zst
+  faugus-launcher:
+    runs-on: ubuntu-latest
+    needs: [icoextract, python-pynput]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download icoextract
+        uses: actions/download-artifact@v4
+        with:
+          name: icoextract-package
+
+      - name: download python-pynput
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pynput-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/faugus-launcher.git
+
+      - name: give build user perms
+        run: chown -R build:build faugus-launcher
+
+      - name: build package
+        run: su build -c "cd faugus-launcher && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' faugus-launcher/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: faugus-launcher-package
+          path: faugus-launcher/*.pkg.tar.zst
+  i18nspector:
+    runs-on: ubuntu-latest
+    needs: python-rply
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-rply
+        uses: actions/download-artifact@v4
+        with:
+          name: python-rply-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/i18nspector.git
+
+      - name: give build user perms
+        run: chown -R build:build i18nspector
+
+      - name: build package
+        run: su build -c "cd i18nspector && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' i18nspector/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: i18nspector-package
+          path: i18nspector/*.pkg.tar.zst
+  rnc2rng:
+    runs-on: ubuntu-latest
+    needs: python-rply
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-rply
+        uses: actions/download-artifact@v4
+        with:
+          name: python-rply-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/rnc2rng.git
+
+      - name: give build user perms
+        run: chown -R build:build rnc2rng
+
+      - name: build package
+        run: su build -c "cd rnc2rng && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' rnc2rng/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: rnc2rng-package
+          path: rnc2rng/*.pkg.tar.zst
+  python-baron:
+    runs-on: ubuntu-latest
+    needs: [python-rply, python-pytest-runner]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-rply
+        uses: actions/download-artifact@v4
+        with:
+          name: python-rply-package
+
+      - name: download python-pytest-runner
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pytest-runner-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-baron.git
+
+      - name: give build user perms
+        run: chown -R build:build python-baron
+
+      - name: build package
+        run: su build -c "cd python-baron && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-baron/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-baron-package
+          path: python-baron/*.pkg.tar.zst
+  python-redbaron:
+    runs-on: ubuntu-latest
+    needs: python-baron
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-baron
+        uses: actions/download-artifact@v4
+        with:
+          name: python-baron-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-redbaron.git
+
+      - name: give build user perms
+        run: chown -R build:build python-redbaron
+
+      - name: build package
+        run: su build -c "cd python-redbaron && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-redbaron/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-redbaron-package
+          path: python-redbaron/*.pkg.tar.zst
+  python-exif:
+    runs-on: ubuntu-latest
+    needs: python-plum
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-plum
+        uses: actions/download-artifact@v4
+        with:
+          name: python-plum-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-exif.git
+
+      - name: give build user perms
+        run: chown -R build:build python-exif
+
+      - name: build package
+        run: su build -c "cd python-exif && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-exif/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-exif-package
+          path: python-exif/*.pkg.tar.zst
+  beeref:
+    runs-on: ubuntu-latest
+    needs: [python-exif, python-rectangle-packer]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-exif
+        uses: actions/download-artifact@v4
+        with:
+          name: python-exif-package
+
+      - name: download python-rectangle-packer
+        uses: actions/download-artifact@v4
+        with:
+          name: python-rectangle-packer-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/beeref.git
+
+      - name: give build user perms
+        run: chown -R build:build beeref
+
+      - name: build package
+        run: su build -c "cd beeref && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' beeref/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: beeref-package
+          path: beeref/*.pkg.tar.zst
+  python-expiringdict:
+    runs-on: ubuntu-latest
+    needs: python-mock
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-mock
+        uses: actions/download-artifact@v4
+        with:
+          name: python-mock-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-expiringdict.git
+
+      - name: give build user perms
+        run: chown -R build:build python-expiringdict
+
+      - name: build package
+        run: su build -c "cd python-expiringdict && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-expiringdict/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-expiringdict-package
+          path: python-expiringdict/*.pkg.tar.zst
+  bk7231tools:
+    runs-on: ubuntu-latest
+    needs: python-datastruct
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-datastruct
+        uses: actions/download-artifact@v4
+        with:
+          name: python-datastruct-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/bk7231tools.git
+
+      - name: give build user perms
+        run: chown -R build:build bk7231tools
+
+      - name: build package
+        run: su build -c "cd bk7231tools && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' bk7231tools/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: bk7231tools-package
+          path: bk7231tools/*.pkg.tar.zst
+  meanalyzer:
+    runs-on: ubuntu-latest
+    needs: [python-crccheck, python-pltable]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-crccheck
+        uses: actions/download-artifact@v4
+        with:
+          name: python-crccheck-package
+
+      - name: download python-pltable
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pltable-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/meanalyzer.git
+
+      - name: give build user perms
+        run: chown -R build:build meanalyzer
+
+      - name: build package
+        run: su build -c "cd meanalyzer && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' meanalyzer/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: meanalyzer-package
+          path: meanalyzer/*.pkg.tar.zst
+  python-bincopy:
+    runs-on: ubuntu-latest
+    needs: python-argparse-addons
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-argparse-addons
+        uses: actions/download-artifact@v4
+        with:
+          name: python-argparse-addons-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-bincopy.git
+
+      - name: give build user perms
+        run: chown -R build:build python-bincopy
+
+      - name: build package
+        run: su build -c "cd python-bincopy && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-bincopy/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-bincopy-package
+          path: python-bincopy/*.pkg.tar.zst
+  python-pymboot:
+    runs-on: ubuntu-latest
+    needs: [python-bincopy, python-pyenum]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-bincopy
+        uses: actions/download-artifact@v4
+        with:
+          name: python-bincopy-package
+
+      - name: download python-pyenum
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pyenum-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pymboot.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pymboot
+
+      - name: build package
+        run: su build -c "cd python-pymboot && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-pymboot/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pymboot-package
+          path: python-pymboot/*.pkg.tar.zst
+  audiotag:
+    runs-on: ubuntu-latest
+    needs: python-pytaglib
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-pytaglib
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pytaglib-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/audiotag.git
+
+      - name: give build user perms
+        run: chown -R build:build audiotag
+
+      - name: build package
+        run: su build -c "cd audiotag && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' audiotag/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: audiotag-package
+          path: audiotag/*.pkg.tar.zst
+  bluemindo:
+    runs-on: ubuntu-latest
+    needs: python-pytaglib
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-pytaglib
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pytaglib-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/bluemindo.git
+
+      - name: give build user perms
+        run: chown -R build:build bluemindo
+
+      - name: build package
+        run: su build -c "cd bluemindo && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' bluemindo/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: bluemindo-package
+          path: bluemindo/*.pkg.tar.zst
+  rawsteel-music-player:
+    runs-on: ubuntu-latest
+    needs: python-pytaglib
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-pytaglib
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pytaglib-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/rawsteel-music-player.git
+
+      - name: give build user perms
+        run: chown -R build:build rawsteel-music-player
+
+      - name: build package
+        run: su build -c "cd rawsteel-music-player && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' rawsteel-music-player/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: rawsteel-music-player-package
+          path: rawsteel-music-player/*.pkg.tar.zst
+  sqlite-utils:
+    runs-on: ubuntu-latest
+    needs: [python-click-default-group, python-sqlite-fts4]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-click-default-group
+        uses: actions/download-artifact@v4
+        with:
+          name: python-click-default-group-package
+
+      - name: download python-sqlite-fts4
+        uses: actions/download-artifact@v4
+        with:
+          name: python-sqlite-fts4-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/sqlite-utils.git
+
+      - name: give build user perms
+        run: chown -R build:build sqlite-utils
+
+      - name: build package
+        run: su build -c "cd sqlite-utils && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' sqlite-utils/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: sqlite-utils-package
+          path: sqlite-utils/*.pkg.tar.zst
+  python-sqlite-migrate:
+    runs-on: ubuntu-latest
+    needs: sqlite-utils
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download sqlite-utils
+        uses: actions/download-artifact@v4
+        with:
+          name: sqlite-utils-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-sqlite-migrate.git
+
+      - name: give build user perms
+        run: chown -R build:build python-sqlite-migrate
+
+      - name: build package
+        run: su build -c "cd python-sqlite-migrate && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-sqlite-migrate/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-sqlite-migrate-package
+          path: python-sqlite-migrate/*.pkg.tar.zst
+  python-llm:
+    runs-on: ubuntu-latest
+    needs: [python-click-default-group, python-sqlite-migrate, sqlite-utils]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-click-default-group
+        uses: actions/download-artifact@v4
+        with:
+          name: python-click-default-group-package
+
+      - name: download python-sqlite-migrate
+        uses: actions/download-artifact@v4
+        with:
+          name: python-sqlite-migrate-package
+
+      - name: download sqlite-utils
+        uses: actions/download-artifact@v4
+        with:
+          name: sqlite-utils-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-llm.git
+
+      - name: give build user perms
+        run: chown -R build:build python-llm
+
+      - name: build package
+        run: su build -c "cd python-llm && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-llm/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-llm-package
+          path: python-llm/*.pkg.tar.zst
+  python-llm-ollama:
+    runs-on: ubuntu-latest
+    needs: [python-llm, python-ollama]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-llm
+        uses: actions/download-artifact@v4
+        with:
+          name: python-llm-package
+
+      - name: download python-ollama
+        uses: actions/download-artifact@v4
+        with:
+          name: python-ollama-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-llm-ollama.git
+
+      - name: give build user perms
+        run: chown -R build:build python-llm-ollama
+
+      - name: build package
+        run: su build -c "cd python-llm-ollama && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-llm-ollama/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-llm-ollama-package
+          path: python-llm-ollama/*.pkg.tar.zst
+  python-textualeffects:
+    runs-on: ubuntu-latest
+    needs: python-terminaltexteffects
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-terminaltexteffects
+        uses: actions/download-artifact@v4
+        with:
+          name: python-terminaltexteffects-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-textualeffects.git
+
+      - name: give build user perms
+        run: chown -R build:build python-textualeffects
+
+      - name: build package
+        run: su build -c "cd python-textualeffects && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-textualeffects/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-textualeffects-package
+          path: python-textualeffects/*.pkg.tar.zst
+  oterm:
+    runs-on: ubuntu-latest
+    needs: [python-aiosql, python-ollama, python-rich-pixels, python-textualeffects]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-aiosql
+        uses: actions/download-artifact@v4
+        with:
+          name: python-aiosql-package
+
+      - name: download python-ollama
+        uses: actions/download-artifact@v4
+        with:
+          name: python-ollama-package
+
+      - name: download python-rich-pixels
+        uses: actions/download-artifact@v4
+        with:
+          name: python-rich-pixels-package
+
+      - name: download python-textualeffects
+        uses: actions/download-artifact@v4
+        with:
+          name: python-textualeffects-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/oterm.git
+
+      - name: give build user perms
+        run: chown -R build:build oterm
+
+      - name: build package
+        run: su build -c "cd oterm && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' oterm/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: oterm-package
+          path: oterm/*.pkg.tar.zst
+  python-workalendar:
+    runs-on: ubuntu-latest
+    needs: [python-lunardate, python-pyephem]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-lunardate
+        uses: actions/download-artifact@v4
+        with:
+          name: python-lunardate-package
+
+      - name: download python-pyephem
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pyephem-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-workalendar.git
+
+      - name: give build user perms
+        run: chown -R build:build python-workalendar
+
+      - name: build package
+        run: su build -c "cd python-workalendar && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-workalendar/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-workalendar-package
+          path: python-workalendar/*.pkg.tar.zst
+  python-cartopy:
+    runs-on: ubuntu-latest
+    needs: python-pyshp
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-pyshp
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pyshp-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-cartopy.git
+
+      - name: give build user perms
+        run: chown -R build:build python-cartopy
+
+      - name: build package
+        run: su build -c "cd python-cartopy && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-cartopy/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-cartopy-package
+          path: python-cartopy/*.pkg.tar.zst
+  marimo:
+    runs-on: ubuntu-latest
+    needs: python-narwhals
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-narwhals
+        uses: actions/download-artifact@v4
+        with:
+          name: python-narwhals-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/marimo.git
+
+      - name: give build user perms
+        run: chown -R build:build marimo
+
+      - name: build package
+        run: su build -c "cd marimo && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' marimo/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: marimo-package
+          path: marimo/*.pkg.tar.zst
+  python-altair:
+    runs-on: ubuntu-latest
+    needs: python-narwhals
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-narwhals
+        uses: actions/download-artifact@v4
+        with:
+          name: python-narwhals-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-altair.git
+
+      - name: give build user perms
+        run: chown -R build:build python-altair
+
+      - name: build package
+        run: su build -c "cd python-altair && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-altair/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-altair-package
+          path: python-altair/*.pkg.tar.zst
+  python-librespot:
+    runs-on: ubuntu-latest
+    needs: python-pyogg
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-pyogg
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pyogg-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-librespot.git
+
+      - name: give build user perms
+        run: chown -R build:build python-librespot
+
+      - name: build package
+        run: su build -c "cd python-librespot && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-librespot/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-librespot-package
+          path: python-librespot/*.pkg.tar.zst
+  zotify:
+    runs-on: ubuntu-latest
+    needs: [python-ffmpy, python-librespot, python-music-tag, python-pwinput]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-ffmpy
+        uses: actions/download-artifact@v4
+        with:
+          name: python-ffmpy-package
+
+      - name: download python-librespot
+        uses: actions/download-artifact@v4
+        with:
+          name: python-librespot-package
+
+      - name: download python-music-tag
+        uses: actions/download-artifact@v4
+        with:
+          name: python-music-tag-package
+
+      - name: download python-pwinput
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pwinput-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/zotify.git
+
+      - name: give build user perms
+        run: chown -R build:build zotify
+
+      - name: build package
+        run: su build -c "cd zotify && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' zotify/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: zotify-package
+          path: zotify/*.pkg.tar.zst
+  python-pydub:
+    runs-on: ubuntu-latest
+    needs: python-audioop-lts
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-audioop-lts
+        uses: actions/download-artifact@v4
+        with:
+          name: python-audioop-lts-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pydub.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pydub
+
+      - name: build package
+        run: su build -c "cd python-pydub && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-pydub/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pydub-package
+          path: python-pydub/*.pkg.tar.zst
+  python-gradio:
+    runs-on: ubuntu-latest
+    needs: [python-altair, python-ffmpy, python-gradio-client, python-pydub]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-altair
+        uses: actions/download-artifact@v4
+        with:
+          name: python-altair-package
+
+      - name: download python-ffmpy
+        uses: actions/download-artifact@v4
+        with:
+          name: python-ffmpy-package
+
+      - name: download python-gradio-client
+        uses: actions/download-artifact@v4
+        with:
+          name: python-gradio-client-package
+
+      - name: download python-pydub
+        uses: actions/download-artifact@v4
+        with:
+          name: python-pydub-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-gradio.git
+
+      - name: give build user perms
+        run: chown -R build:build python-gradio
+
+      - name: build package
+        run: su build -c "cd python-gradio && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-gradio/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-gradio-package
+          path: python-gradio/*.pkg.tar.zst
+  hivision-id-photos:
+    runs-on: ubuntu-latest
+    needs: [hivision-id-photos-modnet, python-mtcnn-runtime]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download hivision-id-photos-modnet
+        uses: actions/download-artifact@v4
+        with:
+          name: hivision-id-photos-modnet-package
+
+      - name: download python-mtcnn-runtime
+        uses: actions/download-artifact@v4
+        with:
+          name: python-mtcnn-runtime-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/hivision-id-photos.git
+
+      - name: give build user perms
+        run: chown -R build:build hivision-id-photos
+
+      - name: build package
+        run: su build -c "cd hivision-id-photos && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' hivision-id-photos/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: hivision-id-photos-package
+          path: hivision-id-photos/*.pkg.tar.zst
+  hivision-id-photos-api:
+    runs-on: ubuntu-latest
+    needs: hivision-id-photos
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download hivision-id-photos
+        uses: actions/download-artifact@v4
+        with:
+          name: hivision-id-photos-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/hivision-id-photos-api.git
+
+      - name: give build user perms
+        run: chown -R build:build hivision-id-photos-api
+
+      - name: build package
+        run: su build -c "cd hivision-id-photos-api && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' hivision-id-photos-api/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: hivision-id-photos-api-package
+          path: hivision-id-photos-api/*.pkg.tar.zst
+  hivision-id-photos-web:
+    runs-on: ubuntu-latest
+    needs: [hivision-id-photos, python-gradio]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download hivision-id-photos
+        uses: actions/download-artifact@v4
+        with:
+          name: hivision-id-photos-package
+
+      - name: download python-gradio
+        uses: actions/download-artifact@v4
+        with:
+          name: python-gradio-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-gradio.git
+
+      - name: give build user perms
+        run: chown -R build:build python-gradio
+
+      - name: build package
+        run: su build -c "cd python-gradio && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-gradio/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-gradio-package
+          path: python-gradio/*.pkg.tar.zst
+  libtiff-lerc:
+    runs-on: ubuntu-latest
+    needs: lerc
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download lerc
+        uses: actions/download-artifact@v4
+        with:
+          name: lerc-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/libtiff-lerc.git
+
+      - name: give build user perms
+        run: chown -R build:build libtiff-lerc
+
+      - name: build package
+        run: su build -c "cd libtiff-lerc && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' libtiff-lerc/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: libtiff-lerc-package
+          path: libtiff-lerc/*.pkg.tar.zst
+  python-imagecodecs:
+    runs-on: ubuntu-latest
+    needs: [brunsli, charls, lerc, lzfse]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download brunsli
+        uses: actions/download-artifact@v4
+        with:
+          name: brunsli-package
+
+      - name: download charls
+        uses: actions/download-artifact@v4
+        with:
+          name: charls-package
+
+      - name: download lerc
+        uses: actions/download-artifact@v4
+        with:
+          name: lerc-package
+
+      - name: download lzfse
+        uses: actions/download-artifact@v4
+        with:
+          name: lzfse-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-imagecodecs.git
+
+      - name: give build user perms
+        run: chown -R build:build python-imagecodecs
+
+      - name: build package
+        run: su build -c "cd python-imagecodecs && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-imagecodecs/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-imagecodecs-package
+          path: python-imagecodecs/*.pkg.tar.zst
+  python-tifffile-doc:
+    runs-on: ubuntu-latest
+    needs: python-imagecodecs
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-imagecodecs
+        uses: actions/download-artifact@v4
+        with:
+          name: python-imagecodecs-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-tifffile-doc.git
+
+      - name: give build user perms
+        run: chown -R build:build python-tifffile-doc
+
+      - name: build package
+        run: su build -c "cd python-tifffile-doc && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-tifffile-doc/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-tifffile-doc-package
+          path: python-tifffile-doc/*.pkg.tar.zst
+  python-tifffile:
+    runs-on: ubuntu-latest
+    needs: python-imagecodecs
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download python-imagecodecs
+        uses: actions/download-artifact@v4
+        with:
+          name: python-imagecodecs-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-tifffile.git
+
+      - name: give build user perms
+        run: chown -R build:build python-tifffile
+
+      - name: build package
+        run: su build -c "cd python-tifffile && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-tifffile/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-tifffile-package
+          path: python-tifffile/*.pkg.tar.zst
+  ctl:
+    runs-on: ubuntu-latest
+    needs: aces-container
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download aces-container
+        uses: actions/download-artifact@v4
+        with:
+          name: aces-container-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/ctl.git
+
+      - name: give build user perms
+        run: chown -R build:build ctl
+
+      - name: build package
+        run: su build -c "cd ctl && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' ctl/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: ctl-package
+          path: ctl/*.pkg.tar.zst
+  art-rawconverter:
+    runs-on: ubuntu-latest
+    needs: ctl
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download ctl
+        uses: actions/download-artifact@v4
+        with:
+          name: ctl-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/art-rawconverter.git
+
+      - name: give build user perms
+        run: chown -R build:build art-rawconverter
+
+      - name: build package
+        run: su build -c "cd art-rawconverter && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' art-rawconverter/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: art-rawconverter-package
+          path: art-rawconverter/*.pkg.tar.zst
+  art-rawconverter-ctlscripts:
+    runs-on: ubuntu-latest
+    needs: [art-rawconverter, ctl]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download art-rawconverter
+        uses: actions/download-artifact@v4
+        with:
+          name: art-rawconverter-package
+
+      - name: download ctl
+        uses: actions/download-artifact@v4
+        with:
+          name: ctl-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/art-rawconverter-ctlscripts.git
+
+      - name: give build user perms
+        run: chown -R build:build art-rawconverter-ctlscripts
+
+      - name: build package
+        run: su build -c "cd art-rawconverter-ctlscripts && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' art-rawconverter-ctlscripts/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: art-rawconverter-ctlscripts-package
+          path: art-rawconverter-ctlscripts/*.pkg.tar.zst
+  python-pysiril:
+    runs-on: ubuntu-latest
+    needs: siril
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download siril
+        uses: actions/download-artifact@v4
+        with:
+          name: siril-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/python-pysiril.git
+
+      - name: give build user perms
+        run: chown -R build:build python-pysiril
+
+      - name: build package
+        run: su build -c "cd python-pysiril && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' python-pysiril/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: python-pysiril-package
+          path: python-pysiril/*.pkg.tar.zst
+  art-rawconverter-imageio:
+    runs-on: ubuntu-latest
+    needs: [art-rawconverter, python-openexr, python-tifffile, siril]
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools perl-rename --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+      
+      - name: download art-rawconverter
+        uses: actions/download-artifact@v4
+        with:
+          name: art-rawconverter-package
+
+      - name: download python-openexr
+        uses: actions/download-artifact@v4
+        with:
+          name: python-openexr-package
+
+      - name: download python-tifffile
+        uses: actions/download-artifact@v4
+        with:
+          name: python-tifffile-package
+
+      - name: download siril
+        uses: actions/download-artifact@v4
+        with:
+          name: siril-package
+
+      - name: install dependencies
+        uses: pacman -U *.pkg.tar.zst --noconfirm
+      
+      - name: download package
+        run: git clone https://aur.archlinux.org/art-rawconverter-imageio.git
+
+      - name: give build user perms
+        run: chown -R build:build art-rawconverter-imageio
+
+      - name: build package
+        run: su build -c "cd art-rawconverter-imageio && makepkg -s --noconfirm"
+    
+      - name: remove colons
+        run: perl-rename 's|:|-|g' art-rawconverter-imageio/*.pkg.tar.zst
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: art-rawconverter-imageio-package
+          path: art-rawconverter-imageio/*.pkg.tar.zst
+
