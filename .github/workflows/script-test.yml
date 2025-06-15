@@ -17,7 +17,139 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  element-desktop-git:
+  schildichat-desktop:
+    runs-on: ubuntu-latest
+    needs: [electron25]
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download electron25
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: electron25-package
+
+      - name: install electron25
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/schildichat-desktop.git
+
+      - name: give build user perms
+        run: chown -R build:build schildichat-desktop
+
+      - name: build in clean chroot
+        run: su build -c "cd schildichat-desktop && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: schildichat-desktop-package
+          path: schildichat-desktop/*.pkg.tar.zst
+
+  electron25:
+    runs-on: ubuntu-latest
+    needs: [nodejs-lts-hydrogen]
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download nodejs-lts-hydrogen
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: nodejs-lts-hydrogen-package
+
+      - name: install nodejs-lts-hydrogen
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/electron25.git
+
+      - name: give build user perms
+        run: chown -R build:build electron25
+
+      - name: build in clean chroot
+        run: su build -c "cd electron25 && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: electron25-package
+          path: electron25/*.pkg.tar.zst
+
+  nodejs-lts-hydrogen:
+    runs-on: ubuntu-latest
+    needs: [python310]
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download python310
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: python310-package
+
+      - name: install python310
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/nodejs-lts-hydrogen.git
+
+      - name: give build user perms
+        run: chown -R build:build nodejs-lts-hydrogen
+
+      - name: build in clean chroot
+        run: su build -c "cd nodejs-lts-hydrogen && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: nodejs-lts-hydrogen-package
+          path: nodejs-lts-hydrogen/*.pkg.tar.zst
+
+  python310:
     runs-on: ubuntu-latest
 
     container:
@@ -39,16 +171,16 @@ jobs:
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
 
       - name: download package
-        run: git clone https://aur.archlinux.org/element-desktop-git.git
+        run: git clone https://aur.archlinux.org/python310.git
 
       - name: give build user perms
-        run: chown -R build:build element-desktop-git
+        run: chown -R build:build python310
 
       - name: build in clean chroot
-        run: su build -c "cd element-desktop-git && makepkg -s --noconfirm"
+        run: su build -c "cd python310 && makepkg -s --noconfirm"
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: element-desktop-git-package
-          path: element-desktop-git/*.pkg.tar.zst
+          name: python310-package
+          path: python310/*.pkg.tar.zst
