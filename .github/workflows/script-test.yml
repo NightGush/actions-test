@@ -17,9 +17,9 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  octopi:
+  element-desktop-git:
     runs-on: ubuntu-latest
-    needs: [qt-sudo]
+    needs: [element-web-git]
     container:
       image: archlinux
       options: --privileged
@@ -38,30 +38,30 @@ jobs:
         run: |
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
 
-      - name: download qt-sudo
+      - name: download element-web-git
         uses: actions/download-artifact@v4.1.8
         with:
-          name: qt-sudo-package
+          name: element-web-git-package
 
-      - name: install qt-sudo
+      - name: install element-web-git
         run: pacman -U --noconfirm *.pkg.tar.zst
 
       - name: download package
-        run: git clone https://aur.archlinux.org/octopi.git
+        run: git clone https://aur.archlinux.org/element-desktop-git.git
 
       - name: give build user perms
-        run: chown -R build:build octopi
+        run: chown -R build:build element-desktop-git
 
       - name: build in clean chroot
-        run: su build -c "cd octopi && makepkg -s --noconfirm"
+        run: su build -c "cd element-desktop-git && makepkg -s --noconfirm"
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: octopi-package
-          path: octopi/*.pkg.tar.zst
+          name: element-desktop-git-package
+          path: element-desktop-git/*.pkg.tar.zst
 
-  qt-sudo:
+  element-web-git:
     runs-on: ubuntu-latest
 
     container:
@@ -83,16 +83,16 @@ jobs:
           echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
 
       - name: download package
-        run: git clone https://aur.archlinux.org/qt-sudo.git
+        run: git clone https://aur.archlinux.org/element-web-git.git
 
       - name: give build user perms
-        run: chown -R build:build qt-sudo
+        run: chown -R build:build element-web-git
 
       - name: build in clean chroot
-        run: su build -c "cd qt-sudo && makepkg -s --noconfirm"
+        run: su build -c "cd element-web-git && makepkg -s --noconfirm"
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
-          name: qt-sudo-package
-          path: qt-sudo/*.pkg.tar.zst
+          name: element-web-git-package
+          path: element-web-git/*.pkg.tar.zst
