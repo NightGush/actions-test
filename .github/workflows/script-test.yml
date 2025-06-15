@@ -184,3 +184,1045 @@ jobs:
         with:
           name: python310-package
           path: python310/*.pkg.tar.zst
+
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  ffmpeg-full:
+    runs-on: ubuntu-latest
+    needs: [celt, flite1, lcevcdec, lensfun-git, opencv2, openvino, quirc, chromaprint-fftw, davs2, libaribcaption, libklvanc, rockchip-mpp, shine, uavs3d-git, vo-amrwbenc, vvenc, xavs, xavs2, xevd, xeve, decklink-sdk]
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download celt
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: celt-package
+
+      - name: install celt
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download flite1
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: flite1-package
+
+      - name: install flite1
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download lcevcdec
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: lcevcdec-package
+
+      - name: install lcevcdec
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download lensfun-git
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: lensfun-git-package
+
+      - name: install lensfun-git
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download opencv2
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: opencv2-package
+
+      - name: install opencv2
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download openvino
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: openvino-package
+
+      - name: install openvino
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download quirc
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: quirc-package
+
+      - name: install quirc
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download chromaprint-fftw
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: chromaprint-fftw-package
+
+      - name: install chromaprint-fftw
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download davs2
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: davs2-package
+
+      - name: install davs2
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download libaribcaption
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: libaribcaption-package
+
+      - name: install libaribcaption
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download libklvanc
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: libklvanc-package
+
+      - name: install libklvanc
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download rockchip-mpp
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: rockchip-mpp-package
+
+      - name: install rockchip-mpp
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download shine
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: shine-package
+
+      - name: install shine
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download uavs3d-git
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: uavs3d-git-package
+
+      - name: install uavs3d-git
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download vo-amrwbenc
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: vo-amrwbenc-package
+
+      - name: install vo-amrwbenc
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download vvenc
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: vvenc-package
+
+      - name: install vvenc
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download xavs
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: xavs-package
+
+      - name: install xavs
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download xavs2
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: xavs2-package
+
+      - name: install xavs2
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download xevd
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: xevd-package
+
+      - name: install xevd
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download xeve
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: xeve-package
+
+      - name: install xeve
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+
+      - name: download decklink-sdk
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: decklink-sdk-package
+
+      - name: install decklink-sdk
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/ffmpeg-full.git
+
+      - name: give build user perms
+        run: chown -R build:build ffmpeg-full
+
+      - name: build in clean chroot
+        run: su build -c "cd ffmpeg-full && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: ffmpeg-full-package
+          path: ffmpeg-full/*.pkg.tar.zst
+
+  celt:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/celt.git
+
+      - name: give build user perms
+        run: chown -R build:build celt
+
+      - name: build in clean chroot
+        run: su build -c "cd celt && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: celt-package
+          path: celt/*.pkg.tar.zst
+
+  flite1:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/flite1.git
+
+      - name: give build user perms
+        run: chown -R build:build flite1
+
+      - name: build in clean chroot
+        run: su build -c "cd flite1 && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: flite1-package
+          path: flite1/*.pkg.tar.zst
+
+  lcevcdec:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/lcevcdec.git
+
+      - name: give build user perms
+        run: chown -R build:build lcevcdec
+
+      - name: build in clean chroot
+        run: su build -c "cd lcevcdec && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: lcevcdec-package
+          path: lcevcdec/*.pkg.tar.zst
+
+  lensfun-git:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/lensfun-git.git
+
+      - name: give build user perms
+        run: chown -R build:build lensfun-git
+
+      - name: build in clean chroot
+        run: su build -c "cd lensfun-git && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: lensfun-git-package
+          path: lensfun-git/*.pkg.tar.zst
+
+  opencv2:
+    runs-on: ubuntu-latest
+    needs: [gtkglext]
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download gtkglext
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: gtkglext-package
+
+      - name: install gtkglext
+        run: pacman -U --noconfirm *.pkg.tar.zst
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/opencv2.git
+
+      - name: give build user perms
+        run: chown -R build:build opencv2
+
+      - name: build in clean chroot
+        run: su build -c "cd opencv2 && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: opencv2-package
+          path: opencv2/*.pkg.tar.zst
+
+  gtkglext:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/gtkglext.git
+
+      - name: give build user perms
+        run: chown -R build:build gtkglext
+
+      - name: build in clean chroot
+        run: su build -c "cd gtkglext && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: gtkglext-package
+          path: gtkglext/*.pkg.tar.zst
+
+  openvino:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/openvino.git
+
+      - name: give build user perms
+        run: chown -R build:build openvino
+
+      - name: build in clean chroot
+        run: su build -c "cd openvino && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: openvino-package
+          path: openvino/*.pkg.tar.zst
+
+  quirc:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/quirc.git
+
+      - name: give build user perms
+        run: chown -R build:build quirc
+
+      - name: build in clean chroot
+        run: su build -c "cd quirc && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: quirc-package
+          path: quirc/*.pkg.tar.zst
+
+  chromaprint-fftw:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/chromaprint-fftw.git
+
+      - name: give build user perms
+        run: chown -R build:build chromaprint-fftw
+
+      - name: build in clean chroot
+        run: su build -c "cd chromaprint-fftw && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: chromaprint-fftw-package
+          path: chromaprint-fftw/*.pkg.tar.zst
+
+  davs2:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/davs2.git
+
+      - name: give build user perms
+        run: chown -R build:build davs2
+
+      - name: build in clean chroot
+        run: su build -c "cd davs2 && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: davs2-package
+          path: davs2/*.pkg.tar.zst
+
+  libaribcaption:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/libaribcaption.git
+
+      - name: give build user perms
+        run: chown -R build:build libaribcaption
+
+      - name: build in clean chroot
+        run: su build -c "cd libaribcaption && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: libaribcaption-package
+          path: libaribcaption/*.pkg.tar.zst
+
+  libklvanc:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/libklvanc.git
+
+      - name: give build user perms
+        run: chown -R build:build libklvanc
+
+      - name: build in clean chroot
+        run: su build -c "cd libklvanc && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: libklvanc-package
+          path: libklvanc/*.pkg.tar.zst
+
+  rockchip-mpp:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/rockchip-mpp.git
+
+      - name: give build user perms
+        run: chown -R build:build rockchip-mpp
+
+      - name: build in clean chroot
+        run: su build -c "cd rockchip-mpp && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: rockchip-mpp-package
+          path: rockchip-mpp/*.pkg.tar.zst
+
+  shine:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/shine.git
+
+      - name: give build user perms
+        run: chown -R build:build shine
+
+      - name: build in clean chroot
+        run: su build -c "cd shine && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: shine-package
+          path: shine/*.pkg.tar.zst
+
+  uavs3d-git:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/uavs3d-git.git
+
+      - name: give build user perms
+        run: chown -R build:build uavs3d-git
+
+      - name: build in clean chroot
+        run: su build -c "cd uavs3d-git && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: uavs3d-git-package
+          path: uavs3d-git/*.pkg.tar.zst
+
+  vo-amrwbenc:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/vo-amrwbenc.git
+
+      - name: give build user perms
+        run: chown -R build:build vo-amrwbenc
+
+      - name: build in clean chroot
+        run: su build -c "cd vo-amrwbenc && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: vo-amrwbenc-package
+          path: vo-amrwbenc/*.pkg.tar.zst
+
+  vvenc:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/vvenc.git
+
+      - name: give build user perms
+        run: chown -R build:build vvenc
+
+      - name: build in clean chroot
+        run: su build -c "cd vvenc && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: vvenc-package
+          path: vvenc/*.pkg.tar.zst
+
+  xavs:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/xavs.git
+
+      - name: give build user perms
+        run: chown -R build:build xavs
+
+      - name: build in clean chroot
+        run: su build -c "cd xavs && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: xavs-package
+          path: xavs/*.pkg.tar.zst
+
+  xavs2:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/xavs2.git
+
+      - name: give build user perms
+        run: chown -R build:build xavs2
+
+      - name: build in clean chroot
+        run: su build -c "cd xavs2 && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: xavs2-package
+          path: xavs2/*.pkg.tar.zst
+
+  xevd:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/xevd.git
+
+      - name: give build user perms
+        run: chown -R build:build xevd
+
+      - name: build in clean chroot
+        run: su build -c "cd xevd && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: xevd-package
+          path: xevd/*.pkg.tar.zst
+
+  xeve:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/xeve.git
+
+      - name: give build user perms
+        run: chown -R build:build xeve
+
+      - name: build in clean chroot
+        run: su build -c "cd xeve && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: xeve-package
+          path: xeve/*.pkg.tar.zst
+
+  decklink-sdk:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+      options: --privileged
+
+    steps:
+      - name: update pacman
+        run: pacman -Syu --noconfirm
+
+      - name: install git
+        run: pacman -S git base-devel devtools --noconfirm
+
+      - name: add build user
+        run: useradd -m build
+
+      - name: give build unlimited power
+        run: |
+          echo "build ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers.d/build
+
+      - name: download package
+        run: git clone https://aur.archlinux.org/decklink-sdk.git
+
+      - name: give build user perms
+        run: chown -R build:build decklink-sdk
+
+      - name: build in clean chroot
+        run: su build -c "cd decklink-sdk && makepkg -s --noconfirm"
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.0
+        with:
+          name: decklink-sdk-package
+          path: decklink-sdk/*.pkg.tar.zst
