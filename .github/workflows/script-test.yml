@@ -235,6 +235,9 @@ jobs:
       - name: build in clean chroot
         run: su build -c "cd ffmpeg-full && makepkg -s --noconfirm"
 
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
@@ -270,6 +273,9 @@ jobs:
 
       - name: build in clean chroot
         run: su build -c "cd celt && makepkg -s --noconfirm"
+
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -307,6 +313,9 @@ jobs:
       - name: build in clean chroot
         run: su build -c "cd flite1 && makepkg -s --noconfirm"
 
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
@@ -343,6 +352,9 @@ jobs:
       - name: build in clean chroot
         run: su build -c "cd lcevcdec && makepkg -s --noconfirm"
 
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
@@ -378,6 +390,9 @@ jobs:
 
       - name: build in clean chroot
         run: su build -c "cd lensfun-git && makepkg -s --noconfirm"
+
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -423,6 +438,9 @@ jobs:
       - name: build in clean chroot
         run: su build -c "cd opencv2 && makepkg -s --noconfirm"
 
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
@@ -458,6 +476,9 @@ jobs:
 
       - name: build in clean chroot
         run: su build -c "cd gtkglext && makepkg -s --noconfirm"
+
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -495,6 +516,9 @@ jobs:
       - name: build in clean chroot
         run: su build -c "cd openvino && makepkg -s --noconfirm"
 
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
@@ -530,6 +554,9 @@ jobs:
 
       - name: build in clean chroot
         run: su build -c "cd quirc && makepkg -s --noconfirm"
+
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -567,6 +594,9 @@ jobs:
       - name: build in clean chroot
         run: su build -c "cd chromaprint-fftw && makepkg -s --noconfirm"
 
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
@@ -602,6 +632,9 @@ jobs:
 
       - name: build in clean chroot
         run: su build -c "cd davs2 && makepkg -s --noconfirm"
+
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -639,6 +672,9 @@ jobs:
       - name: build in clean chroot
         run: su build -c "cd libaribcaption && makepkg -s --noconfirm"
 
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
@@ -674,6 +710,9 @@ jobs:
 
       - name: build in clean chroot
         run: su build -c "cd libklvanc && makepkg -s --noconfirm"
+
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -711,6 +750,9 @@ jobs:
       - name: build in clean chroot
         run: su build -c "cd rockchip-mpp && makepkg -s --noconfirm"
 
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
@@ -746,6 +788,9 @@ jobs:
 
       - name: build in clean chroot
         run: su build -c "cd shine && makepkg -s --noconfirm"
+
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -783,6 +828,9 @@ jobs:
       - name: build in clean chroot
         run: su build -c "cd uavs3d-git && makepkg -s --noconfirm"
 
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
@@ -818,6 +866,9 @@ jobs:
 
       - name: build in clean chroot
         run: su build -c "cd vo-amrwbenc && makepkg -s --noconfirm"
+
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -855,6 +906,9 @@ jobs:
       - name: build in clean chroot
         run: su build -c "cd vvenc && makepkg -s --noconfirm"
 
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
@@ -890,6 +944,9 @@ jobs:
 
       - name: build in clean chroot
         run: su build -c "cd xavs && makepkg -s --noconfirm"
+
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -927,6 +984,9 @@ jobs:
       - name: build in clean chroot
         run: su build -c "cd xavs2 && makepkg -s --noconfirm"
 
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
@@ -962,6 +1022,9 @@ jobs:
 
       - name: build in clean chroot
         run: su build -c "cd xevd && makepkg -s --noconfirm"
+
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -999,6 +1062,9 @@ jobs:
       - name: build in clean chroot
         run: su build -c "cd xeve && makepkg -s --noconfirm"
 
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
         with:
@@ -1034,6 +1100,9 @@ jobs:
 
       - name: build in clean chroot
         run: su build -c "cd decklink-sdk && makepkg -s --noconfirm"
+
+      - name: remove semicolons
+        run: for file in *\;*; do mv "$file" "${file//;/-}"; done
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
