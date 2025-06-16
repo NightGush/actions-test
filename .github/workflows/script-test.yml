@@ -236,7 +236,7 @@ jobs:
         run: su build -c "cd ffmpeg-full && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' ffmpeg-full/*.pkg.tar.zst
+        run: rename ':' '-' ffmpeg-full/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -275,7 +275,7 @@ jobs:
         run: su build -c "cd celt && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' celt/*.pkg.tar.zst
+        run: rename ':' '-' celt/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -314,7 +314,7 @@ jobs:
         run: su build -c "cd flite1 && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' flite1/*.pkg.tar.zst
+        run: rename ':' '-' flite1/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -353,7 +353,7 @@ jobs:
         run: su build -c "cd lcevcdec && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' lcevcdec/*.pkg.tar.zst
+        run: rename ':' '-' lcevcdec/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -392,7 +392,7 @@ jobs:
         run: su build -c "cd lensfun-git && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' lensfun-git/*.pkg.tar.zst
+        run: rename ':' '-' lensfun-git/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -439,7 +439,7 @@ jobs:
         run: su build -c "cd opencv2 && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' opencv2/*.pkg.tar.zst
+        run: rename ':' '-' opencv2/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -478,7 +478,7 @@ jobs:
         run: su build -c "cd gtkglext && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' gtkglext/*.pkg.tar.zst
+        run: rename ':' '-' gtkglext/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -517,7 +517,7 @@ jobs:
         run: su build -c "cd openvino && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' openvino/*.pkg.tar.zst
+        run: rename ':' '-' openvino/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -556,7 +556,7 @@ jobs:
         run: su build -c "cd quirc && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' quirc/*.pkg.tar.zst
+        run: rename ':' '-' quirc/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -595,7 +595,7 @@ jobs:
         run: su build -c "cd chromaprint-fftw && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' chromaprint-fftw/*.pkg.tar.zst
+        run: rename ':' '-' chromaprint-fftw/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -634,7 +634,7 @@ jobs:
         run: su build -c "cd davs2 && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' davs2/*.pkg.tar.zst
+        run: rename ':' '-' davs2/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -673,7 +673,7 @@ jobs:
         run: su build -c "cd libaribcaption && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' libaribcaption/*.pkg.tar.zst
+        run: rename ':' '-' libaribcaption/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -712,7 +712,7 @@ jobs:
         run: su build -c "cd libklvanc && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' libklvanc/*.pkg.tar.zst
+        run: rename ':' '-' libklvanc/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -751,7 +751,7 @@ jobs:
         run: su build -c "cd rockchip-mpp && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' rockchip-mpp/*.pkg.tar.zst
+        run: rename ':' '-' rockchip-mpp/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -790,7 +790,7 @@ jobs:
         run: su build -c "cd shine && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' shine/*.pkg.tar.zst
+        run: rename ':' '-' shine/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -829,7 +829,7 @@ jobs:
         run: su build -c "cd uavs3d-git && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' uavs3d-git/*.pkg.tar.zst
+        run: rename ':' '-' uavs3d-git/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -868,7 +868,7 @@ jobs:
         run: su build -c "cd vo-amrwbenc && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' vo-amrwbenc/*.pkg.tar.zst
+        run: rename ':' '-' vo-amrwbenc/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -907,7 +907,7 @@ jobs:
         run: su build -c "cd vvenc && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' vvenc/*.pkg.tar.zst
+        run: rename ':' '-' vvenc/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -946,7 +946,7 @@ jobs:
         run: su build -c "cd xavs && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' xavs/*.pkg.tar.zst
+        run: rename ':' '-' xavs/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -985,7 +985,7 @@ jobs:
         run: su build -c "cd xavs2 && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' xavs2/*.pkg.tar.zst
+        run: rename ':' '-' xavs2/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -1024,7 +1024,7 @@ jobs:
         run: su build -c "cd xevd && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' xevd/*.pkg.tar.zst
+        run: rename ':' '-' xevd/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -1063,7 +1063,7 @@ jobs:
         run: su build -c "cd xeve && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' xeve/*.pkg.tar.zst
+        run: rename ':' '-' xeve/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
@@ -1102,7 +1102,7 @@ jobs:
         run: su build -c "cd decklink-sdk && makepkg -s --noconfirm"
 
       - name: remove semicolons
-        run: rename ':' '-' decklink-sdk/*.pkg.tar.zst
+        run: rename ':' '-' decklink-sdk/*.tar.zst || [ $? -eq 4 ]
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v4.6.0
