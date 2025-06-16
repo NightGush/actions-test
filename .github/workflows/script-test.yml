@@ -233,7 +233,7 @@ jobs:
         run: chown -R build:build ffmpeg-full
 
       - name: build in clean chroot
-        run: su build -c "cd ffmpeg-full && makepkg -s --noconfirm"
+        run: su build -c "cd ffmpeg-full && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' ffmpeg-full/*.tar.zst || [ $? -eq 4 ]
@@ -272,7 +272,7 @@ jobs:
         run: chown -R build:build celt
 
       - name: build in clean chroot
-        run: su build -c "cd celt && makepkg -s --noconfirm"
+        run: su build -c "cd celt && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' celt/*.tar.zst || [ $? -eq 4 ]
@@ -311,7 +311,7 @@ jobs:
         run: chown -R build:build flite1
 
       - name: build in clean chroot
-        run: su build -c "cd flite1 && makepkg -s --noconfirm"
+        run: su build -c "cd flite1 && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' flite1/*.tar.zst || [ $? -eq 4 ]
@@ -350,7 +350,7 @@ jobs:
         run: chown -R build:build lcevcdec
 
       - name: build in clean chroot
-        run: su build -c "cd lcevcdec && makepkg -s --noconfirm"
+        run: su build -c "cd lcevcdec && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' lcevcdec/*.tar.zst || [ $? -eq 4 ]
@@ -389,7 +389,7 @@ jobs:
         run: chown -R build:build lensfun-git
 
       - name: build in clean chroot
-        run: su build -c "cd lensfun-git && makepkg -s --noconfirm"
+        run: su build -c "cd lensfun-git && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' lensfun-git/*.tar.zst || [ $? -eq 4 ]
@@ -436,7 +436,7 @@ jobs:
         run: chown -R build:build opencv2
 
       - name: build in clean chroot
-        run: su build -c "cd opencv2 && makepkg -s --noconfirm"
+        run: su build -c "cd opencv2 && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' opencv2/*.tar.zst || [ $? -eq 4 ]
@@ -475,7 +475,7 @@ jobs:
         run: chown -R build:build gtkglext
 
       - name: build in clean chroot
-        run: su build -c "cd gtkglext && makepkg -s --noconfirm"
+        run: su build -c "cd gtkglext && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' gtkglext/*.tar.zst || [ $? -eq 4 ]
@@ -514,7 +514,7 @@ jobs:
         run: chown -R build:build openvino
 
       - name: build in clean chroot
-        run: su build -c "cd openvino && makepkg -s --noconfirm"
+        run: su build -c "cd openvino && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' openvino/*.tar.zst || [ $? -eq 4 ]
@@ -553,7 +553,7 @@ jobs:
         run: chown -R build:build quirc
 
       - name: build in clean chroot
-        run: su build -c "cd quirc && makepkg -s --noconfirm"
+        run: su build -c "cd quirc && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' quirc/*.tar.zst || [ $? -eq 4 ]
@@ -592,7 +592,7 @@ jobs:
         run: chown -R build:build chromaprint-fftw
 
       - name: build in clean chroot
-        run: su build -c "cd chromaprint-fftw && makepkg -s --noconfirm"
+        run: su build -c "cd chromaprint-fftw && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' chromaprint-fftw/*.tar.zst || [ $? -eq 4 ]
@@ -631,7 +631,7 @@ jobs:
         run: chown -R build:build davs2
 
       - name: build in clean chroot
-        run: su build -c "cd davs2 && makepkg -s --noconfirm"
+        run: su build -c "cd davs2 && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' davs2/*.tar.zst || [ $? -eq 4 ]
@@ -670,7 +670,7 @@ jobs:
         run: chown -R build:build libaribcaption
 
       - name: build in clean chroot
-        run: su build -c "cd libaribcaption && makepkg -s --noconfirm"
+        run: su build -c "cd libaribcaption && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' libaribcaption/*.tar.zst || [ $? -eq 4 ]
@@ -709,7 +709,7 @@ jobs:
         run: chown -R build:build libklvanc
 
       - name: build in clean chroot
-        run: su build -c "cd libklvanc && makepkg -s --noconfirm"
+        run: su build -c "cd libklvanc && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' libklvanc/*.tar.zst || [ $? -eq 4 ]
@@ -748,7 +748,7 @@ jobs:
         run: chown -R build:build rockchip-mpp
 
       - name: build in clean chroot
-        run: su build -c "cd rockchip-mpp && makepkg -s --noconfirm"
+        run: su build -c "cd rockchip-mpp && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' rockchip-mpp/*.tar.zst || [ $? -eq 4 ]
@@ -787,7 +787,7 @@ jobs:
         run: chown -R build:build shine
 
       - name: build in clean chroot
-        run: su build -c "cd shine && makepkg -s --noconfirm"
+        run: su build -c "cd shine && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' shine/*.tar.zst || [ $? -eq 4 ]
@@ -826,7 +826,7 @@ jobs:
         run: chown -R build:build uavs3d-git
 
       - name: build in clean chroot
-        run: su build -c "cd uavs3d-git && makepkg -s --noconfirm"
+        run: su build -c "cd uavs3d-git && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' uavs3d-git/*.tar.zst || [ $? -eq 4 ]
@@ -865,7 +865,7 @@ jobs:
         run: chown -R build:build vo-amrwbenc
 
       - name: build in clean chroot
-        run: su build -c "cd vo-amrwbenc && makepkg -s --noconfirm"
+        run: su build -c "cd vo-amrwbenc && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' vo-amrwbenc/*.tar.zst || [ $? -eq 4 ]
@@ -904,7 +904,7 @@ jobs:
         run: chown -R build:build vvenc
 
       - name: build in clean chroot
-        run: su build -c "cd vvenc && makepkg -s --noconfirm"
+        run: su build -c "cd vvenc && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' vvenc/*.tar.zst || [ $? -eq 4 ]
@@ -943,7 +943,7 @@ jobs:
         run: chown -R build:build xavs
 
       - name: build in clean chroot
-        run: su build -c "cd xavs && makepkg -s --noconfirm"
+        run: su build -c "cd xavs && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' xavs/*.tar.zst || [ $? -eq 4 ]
@@ -982,7 +982,7 @@ jobs:
         run: chown -R build:build xavs2
 
       - name: build in clean chroot
-        run: su build -c "cd xavs2 && makepkg -s --noconfirm"
+        run: su build -c "cd xavs2 && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' xavs2/*.tar.zst || [ $? -eq 4 ]
@@ -1021,7 +1021,7 @@ jobs:
         run: chown -R build:build xevd
 
       - name: build in clean chroot
-        run: su build -c "cd xevd && makepkg -s --noconfirm"
+        run: su build -c "cd xevd && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' xevd/*.tar.zst || [ $? -eq 4 ]
@@ -1060,7 +1060,7 @@ jobs:
         run: chown -R build:build xeve
 
       - name: build in clean chroot
-        run: su build -c "cd xeve && makepkg -s --noconfirm"
+        run: su build -c "cd xeve && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' xeve/*.tar.zst || [ $? -eq 4 ]
@@ -1099,7 +1099,7 @@ jobs:
         run: chown -R build:build decklink-sdk
 
       - name: build in clean chroot
-        run: su build -c "cd decklink-sdk && makepkg -s --noconfirm"
+        run: su build -c "cd decklink-sdk && makepkg -s --noconfirm --skippgpcheck"
 
       - name: remove semicolons
         run: rename ':' '-' decklink-sdk/*.tar.zst || [ $? -eq 4 ]
